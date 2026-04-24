@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ginie Docs — AI-Powered Canton dApp Generator</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #f9fafb;
+  --bg3: #f3f4f6;
+  --border: #e5e7eb;
+  --border2: #d1d5db;
+  --text: #111827;
+  --text2: #374151;
+  --text3: #6b7280;
+  --text4: #9ca3af;
+  --accent: #0ea5e9;
+  --accent-bg: #f0f9ff;
+  --accent-border: #bae6fd;
+  --green: #059669;
+  --green-bg: #ecfdf5;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --red: #dc2626;
+  --red-bg: #fef2f2;
+  --purple: #7c3aed;
+  --purple-bg: #faf5ff;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+  --sidebar-w: 260px;
+  --content-max: 780px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; font-size: 14px; }
+
+/* TOP BAR */
+.topbar {
+position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+height: 56px; background: var(–bg); border-bottom: 1px solid var(–border);
+display: flex; align-items: center; padding: 0 24px; gap: 0;
+}
+.topbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; width: var(–sidebar-w); flex-shrink: 0; }
+.logo-mark { width: 28px; height: 28px; background: var(–text); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+.logo-mark svg { width: 16px; height: 16px; fill: white; }
+.logo-name { font-size: 15px; font-weight: 600; color: var(–text); }
+.logo-version { font-family: var(–mono); font-size: 10px; color: var(–text4); background: var(–bg3); padding: 2px 6px; border-radius: 4px; margin-left: 4px; }
+.topbar-search { flex: 1; max-width: 400px; }
+.search-box { width: 100%; height: 34px; border: 1px solid var(–border2); border-radius: 6px; padding: 0 12px 0 36px; font-family: var(–sans); font-size: 13px; color: var(–text); background: var(–bg2); outline: none; transition: border-color .15s; position: relative; }
+.search-wrap { position: relative; }
+.search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(–text4); }
+.search-box:focus { border-color: var(–accent); background: var(–bg); }
+.topbar-links { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.topbar-link { font-size: 13px; color: var(–text3); text-decoration: none; transition: color .15s; }
+.topbar-link:hover { color: var(–text); }
+.topbar-btn { font-size: 12px; font-weight: 500; color: var(–bg); background: var(–text); padding: 6px 14px; border-radius: 6px; text-decoration: none; transition: opacity .15s; }
+.topbar-btn:hover { opacity: .85; }
+
+/* LAYOUT */
+.layout { display: flex; padding-top: 56px; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+width: var(–sidebar-w); flex-shrink: 0;
+position: fixed; top: 56px; bottom: 0; left: 0;
+overflow-y: auto; border-right: 1px solid var(–border);
+background: var(–bg); padding: 24px 0 40px;
+scrollbar-width: thin; scrollbar-color: var(–border) transparent;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(–border); }
+.nav-section { padding: 0 16px; margin-bottom: 4px; }
+.nav-section-title { font-size: 11px; font-weight: 600; color: var(–text4); text-transform: uppercase; letter-spacing: .08em; padding: 8px 8px 4px; }
+.nav-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; font-size: 13px; color: var(–text2); cursor: pointer; text-decoration: none; transition: background .1s, color .1s; }
+.nav-item:hover { background: var(–bg3); color: var(–text); }
+.nav-item.active { background: var(–accent-bg); color: var(–accent); font-weight: 500; }
+.nav-item.active .nav-dot { background: var(–accent); }
+.nav-dot { width: 4px; height: 4px; border-radius: 50%; background: var(–border2); flex-shrink: 0; }
+.nav-divider { height: 1px; background: var(–border); margin: 12px 16px; }
+
+/* CONTENT */
+.content { margin-left: var(–sidebar-w); flex: 1; min-width: 0; }
+.content-inner { max-width: calc(var(–content-max) + 80px); margin: 0 auto; padding: 48px 40px 80px; }
+
+/* PAGE SECTIONS */
+.doc-section { padding-top: 48px; margin-bottom: 0; }
+.doc-section:first-child { padding-top: 0; }
+.section-eyebrow { font-family: var(–mono); font-size: 11px; color: var(–accent); font-weight: 500; letter-spacing: .06em; margin-bottom: 8px; }
+.section-title { font-size: 24px; font-weight: 600; color: var(–text); line-height: 1.25; margin-bottom: 12px; }
+.section-desc { font-size: 14px; color: var(–text2); line-height: 1.75; margin-bottom: 24px; max-width: 640px; }
+.divider { height: 1px; background: var(–border); margin: 48px 0; }
+
+/* CALLOUTS */
+.callout { border-radius: 8px; padding: 14px 16px; margin: 20px 0; display: flex; gap: 12px; align-items: flex-start; border: 1px solid; }
+.callout-info { background: var(–accent-bg); border-color: var(–accent-border); }
+.callout-tip { background: var(–green-bg); border-color: #6ee7b7; }
+.callout-warn { background: var(–amber-bg); border-color: #fcd34d; }
+.callout-danger { background: var(–red-bg); border-color: #fca5a5; }
+.callout-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.callout-body { font-size: 13px; line-height: 1.65; }
+.callout-body strong { font-weight: 600; }
+.callout-body code { font-family: var(–mono); font-size: 11px; background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 3px; }
+.callout-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.info-label { color: #0284c7; }
+.tip-label { color: var(–green); }
+.warn-label { color: var(–amber); }
+.danger-label { color: var(–red); }
+
+/* PROSE */
+p { font-size: 14px; color: var(–text2); line-height: 1.75; margin-bottom: 14px; }
+h3 { font-size: 16px; font-weight: 600; color: var(–text); margin: 28px 0 10px; }
+h4 { font-size: 14px; font-weight: 600; color: var(–text); margin: 20px 0 8px; }
+a { color: var(–accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: var(–mono); font-size: 12px; background: var(–bg3); padding: 2px 6px; border-radius: 4px; color: var(–text); border: 1px solid var(–border); }
+strong { font-weight: 600; color: var(–text); }
+
+/* CODE BLOCKS */
+.code-block { background: #0f172a; border-radius: 8px; overflow: hidden; margin: 16px 0; }
+.code-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid #1e293b; }
+.code-lang { font-family: var(–mono); font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .08em; }
+.code-copy { font-family: var(–mono); font-size: 10px; color: #64748b; cursor: pointer; transition: color .15s; border: none; background: none; }
+.code-copy:hover { color: #94a3b8; }
+.code-body { padding: 16px; overflow-x: auto; }
+.code-body pre { font-family: var(–mono); font-size: 13px; line-height: 1.7; color: #e2e8f0; margin: 0; }
+.code-body pre .cm { color: #64748b; }
+.code-body pre .kw { color: #7dd3fc; }
+.code-body pre .fn { color: #a78bfa; }
+.code-body pre .st { color: #86efac; }
+.code-body pre .nu { color: #fbbf24; }
+.code-body pre .tp { color: #f472b6; }
+.code-body pre .op { color: #94a3b8; }
+.terminal { background: #0f172a; border-radius: 8px; padding: 16px; margin: 16px 0; }
+.terminal pre { font-family: var(–mono); font-size: 13px; color: #e2e8f0; line-height: 1.7; margin: 0; }
+.terminal pre .prompt { color: #64748b; }
+.terminal pre .cmd { color: #86efac; }
+.terminal pre .out { color: #94a3b8; }
+.terminal pre .hi { color: #7dd3fc; }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+th { background: var(–bg2); border: 1px solid var(–border); padding: 9px 12px; text-align: left; font-weight: 600; font-size: 12px; color: var(–text); }
+td { border: 1px solid var(–border); padding: 9px 12px; color: var(–text2); vertical-align: top; line-height: 1.55; }
+td code { font-size: 11px; }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
+.card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.card { background: var(–bg); border: 1px solid var(–border); border-radius: 8px; padding: 18px; transition: border-color .15s, box-shadow .15s; }
+.card:hover { border-color: var(–border2); box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card-title { font-size: 14px; font-weight: 600; color: var(–text); margin-bottom: 5px; }
+.card-desc { font-size: 13px; color: var(–text3); line-height: 1.6; }
+.card-link { font-size: 12px; color: var(–accent); margin-top: 10px; display: inline-flex; align-items: center; gap: 4px; }
+
+/* STEPS */
+.steps { margin: 20px 0; }
+.step { display: flex; gap: 16px; margin-bottom: 24px; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: var(–text); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; margin-top: 2px; }
+.step-body { flex: 1; }
+.step-title { font-size: 14px; font-weight: 600; color: var(–text); margin-bottom: 6px; }
+.step-desc { font-size: 13px; color: var(–text2); line-height: 1.65; }
+
+/* PIPELINE */
+.pipeline-flow { display: flex; align-items: center; gap: 0; margin: 20px 0; overflow-x: auto; padding-bottom: 4px; }
+.pipe-step { flex-shrink: 0; background: var(–bg2); border: 1px solid var(–border); border-radius: 6px; padding: 10px 14px; text-align: center; min-width: 100px; }
+.pipe-step-num { font-family: var(–mono); font-size: 9px; color: var(–text4); margin-bottom: 4px; }
+.pipe-step-name { font-size: 12px; font-weight: 600; color: var(–text); margin-bottom: 2px; }
+.pipe-step-sub { font-size: 10px; color: var(–text3); line-height: 1.4; }
+.pipe-arrow { color: var(–border2); font-size: 16px; padding: 0 6px; flex-shrink: 0; }
+
+/* BADGES */
+.badge { display: inline-block; font-family: var(–mono); font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 4px; border: 1px solid; }
+.badge-green { background: var(–green-bg); color: var(–green); border-color: #6ee7b7; }
+.badge-blue { background: var(–accent-bg); color: #0284c7; border-color: var(–accent-border); }
+.badge-amber { background: var(–amber-bg); color: var(–amber); border-color: #fcd34d; }
+.badge-red { background: var(–red-bg); color: var(–red); border-color: #fca5a5; }
+.badge-gray { background: var(–bg3); color: var(–text3); border-color: var(–border2); }
+.badge-purple { background: var(–purple-bg); color: var(–purple); border-color: #c4b5fd; }
+
+/* GATE LIST */
+.gate-list { margin: 16px 0; }
+.gate-item { display: flex; gap: 14px; padding: 14px; border: 1px solid var(–border); border-radius: 8px; margin-bottom: 8px; background: var(–bg); transition: border-color .15s; }
+.gate-item:hover { border-color: var(–border2); }
+.gate-badge { flex-shrink: 0; }
+.gate-body { flex: 1; }
+.gate-title { font-size: 13px; font-weight: 600; color: var(–text); margin-bottom: 3px; }
+.gate-desc { font-size: 12px; color: var(–text3); line-height: 1.55; }
+.gate-example { font-family: var(–mono); font-size: 11px; color: var(–red); margin-top: 6px; background: var(–red-bg); padding: 6px 10px; border-radius: 4px; }
+
+/* MERMAID */
+.diagram-wrap { border: 1px solid var(–border); border-radius: 8px; padding: 24px 16px; margin: 20px 0; background: var(–bg2); overflow-x: auto; }
+.diagram-wrap .mermaid { display: flex; justify-content: center; }
+.diagram-wrap .mermaid svg { max-width: 100% !important; height: auto !important; }
+.diagram-caption { font-size: 12px; color: var(–text4); text-align: center; margin-top: 10px; font-style: italic; }
+
+/* TICKS */
+.tick-list { list-style: none; margin: 12px 0; }
+.tick-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(–text2); padding: 4px 0; line-height: 1.55; }
+.tick-list li::before { content: ‘✓’; color: var(–green); font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+
+/* ON-THIS-PAGE */
+.otp { width: 200px; flex-shrink: 0; position: sticky; top: 80px; align-self: flex-start; padding: 0 0 40px 32px; display: none; }
+@media (min-width: 1200px) { .otp { display: block; } .content-inner { max-width: 780px; } }
+.otp-title { font-size: 11px; font-weight: 600; color: var(–text4); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.otp-item { font-size: 12px; color: var(–text3); display: block; padding: 3px 0; text-decoration: none; transition: color .15s; }
+.otp-item:hover { color: var(–text); }
+
+/* WIDE LAYOUT */
+.page-layout { display: flex; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+.sidebar { display: none; }
+.content { margin-left: 0; }
+.content-inner { padding: 32px 20px 60px; }
+.card-grid, .card-grid-3 { grid-template-columns: 1fr; }
+.pipeline-flow { flex-direction: column; align-items: flex-start; }
+.pipe-arrow { transform: rotate(90deg); }
+.topbar { padding: 0 16px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+  <a class="topbar-logo" href="#">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16"><path d="M8 1L14 4.5V11.5L8 15L2 11.5V4.5L8 1Z"/></svg>
+    </div>
+    <span class="logo-name">Ginie</span>
+    <span class="logo-version">v1.0</span>
+  </a>
+  <div class="search-wrap topbar-search">
+    <svg viewBox="0 0 20 20" fill="currentColor" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:#9ca3af"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+    <input class="search-box" type="text" placeholder="Search docs...">
+  </div>
+  <div class="topbar-links">
+    <a class="topbar-link" href="https://github.com/BlockX-AI/Canton_Ginie" target="_blank">GitHub</a>
+    <a class="topbar-btn" href="https://canton.ginie.xyz" target="_blank">Try Ginie →</a>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<nav class="sidebar">
+  <div class="nav-section">
+    <div class="nav-section-title">Getting Started</div>
+    <a class="nav-item active" onclick="goto('intro')"><div class="nav-dot"></div>Introduction</a>
+    <a class="nav-item" onclick="goto('quickstart')"><div class="nav-dot"></div>Quick Start</a>
+    <a class="nav-item" onclick="goto('concepts')"><div class="nav-dot"></div>Core Concepts</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-section">
+    <div class="nav-section-title">How It Works</div>
+    <a class="nav-item" onclick="goto('pipeline')"><div class="nav-dot"></div>The Pipeline</a>
+    <a class="nav-item" onclick="goto('rag')"><div class="nav-dot"></div>RAG & Pattern Library</a>
+    <a class="nav-item" onclick="goto('audit')"><div class="nav-dot"></div>Audit Layer</a>
+    <a class="nav-item" onclick="goto('scu')"><div class="nav-dot"></div>SCU Compatibility</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-section">
+    <div class="nav-section-title">Features</div>
+    <a class="nav-item" onclick="goto('templates')"><div class="nav-dot"></div>Contract Templates</a>
+    <a class="nav-item" onclick="goto('dapp')"><div class="nav-dot"></div>dApp Builder</a>
+    <a class="nav-item" onclick="goto('github')"><div class="nav-dot"></div>GitHub Integration</a>
+    <a class="nav-item" onclick="goto('mcp')"><div class="nav-dot"></div>MCP Server</a>
+    <a class="nav-item" onclick="goto('ide')"><div class="nav-dot"></div>IDE Extensions</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-section">
+    <div class="nav-section-title">SDK & Self-Hosting</div>
+    <a class="nav-item" onclick="goto('sdk')"><div class="nav-dot"></div>Python SDK</a>
+    <a class="nav-item" onclick="goto('selfhost')"><div class="nav-dot"></div>Self-Hosting</a>
+    <a class="nav-item" onclick="goto('ginie1')"><div class="nav-dot"></div>Ginie-1 (Air-Gapped)</a>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-section">
+    <div class="nav-section-title">Reference</div>
+    <a class="nav-item" onclick="goto('scope')"><div class="nav-dot"></div>Scope & Limitations</a>
+    <a class="nav-item" onclick="goto('faq')"><div class="nav-dot"></div>FAQ</a>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+
+<div class="content">
+<div class="content-inner">
+
+<!-- INTRO -->
+
+<div class="doc-section" id="intro">
+  <div class="section-eyebrow">Documentation</div>
+  <h1 class="section-title">Ginie — AI-Powered Canton dApp Generator</h1>
+  <p class="section-desc">Ginie transforms plain English descriptions into fully compiled, deployed Daml smart contracts on Canton Network — in under 90 seconds, with zero Daml knowledge required.</p>
+
+  <div class="callout callout-info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <div class="callout-label info-label">What makes Ginie different</div>
+      Ginie doesn't just generate code — it <strong>compiles it with the real Canton SDK</strong>, runs a <strong>5-gate security audit</strong>, and <strong>deploys it to a live Canton ledger</strong>. The output is a verified Contract ID, not a code suggestion.
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Quick Start</div>
+      <div class="card-desc">Deploy your first Canton contract in under 5 minutes using the web interface or Python SDK.</div>
+      <div class="card-link" onclick="goto('quickstart')">Get started →</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">How the Pipeline Works</div>
+      <div class="card-desc">Learn how Ginie's 7-stage AI pipeline takes your description from intent to deployed Contract ID.</div>
+      <div class="card-link" onclick="goto('pipeline')">See the pipeline →</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-title">Audit Layer</div>
+      <div class="card-desc">Understand the 5-gate pre-deployment security scan that runs on every generated contract.</div>
+      <div class="card-link" onclick="goto('audit')">See the gates →</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🐍</div>
+      <div class="card-title">Python SDK</div>
+      <div class="card-desc">Use Ginie programmatically with <code>pip install ginie</code>. Script contract generation and deployment.</div>
+      <div class="card-link" onclick="goto('sdk')">SDK reference →</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- QUICKSTART -->
+
+<div class="doc-section" id="quickstart">
+  <div class="section-eyebrow">Getting Started</div>
+  <h2 class="section-title">Quick Start</h2>
+  <p>The fastest way to deploy a Canton contract is through the Ginie web interface. No account, no credentials, no Daml knowledge required.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Go to canton.ginie.xyz</div>
+        <div class="step-desc">The public GinieNet sandbox is available to anyone. No sign-up required. GinieNet is a live Canton testnet — every contract you deploy has a real Contract ID.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Describe your contract in plain English</div>
+        <div class="step-desc">Type what you want the contract to do. You don't need to know Daml syntax. Ginie's Intent Agent converts your description into a structured contract specification.</div>
+        <div class="code-block" style="margin-top:12px">
+          <div class="code-header"><span class="code-lang">example prompt</span></div>
+          <div class="code-body"><pre>Create an IOU between Alice and Bob for £10,000 GBP.
+Alice can transfer the IOU to another party.
+Bob can settle the IOU by paying Alice directly.</pre></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Wait ~35 seconds for the full pipeline</div>
+        <div class="step-desc">Ginie generates the Daml code, compiles it with <code>dpm build</code>, runs the security audit across 5 gates, and deploys the DAR to Canton Ledger API.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Receive your Contract ID</div>
+        <div class="step-desc">Ginie returns a CantonScan link to your live Contract ID. The contract is deployed. You can export the full source, download the DAR, or iterate on it.</div>
+        <div class="terminal" style="margin-top:12px">
+          <pre><span class="out">✓ Compilation passed  (dpm build · Canton SDK 3.4)</span>
+<span class="out">✓ Audit passed        (5/5 gates · 0 critical findings)</span>
+<span class="out">✓ Deployed           </span><span class="hi">Contract ID: #1:00:abc3d7...f92a</span>
+<span class="out">→ CantonScan: https://cantonscan.com/contracts/1-00-abc3d7</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Using the Python SDK</h3>
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">bash</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+    <div class="code-body"><pre><span class="cm"># Install</span>
+<span class="cmd">pip install ginie</span></pre>
+    </div>
+  </div>
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">python</span><button class="code-copy" onclick="copyCode(this)">copy</button></div>
+    <div class="code-body"><pre><span class="kw">from</span> ginie <span class="kw">import</span> GinieClient
+
+client = <span class="fn">GinieClient</span>(api_key=<span class="st">“your-key”</span>)
+
+result = client.<span class="fn">deploy</span>(
+prompt=<span class="st">“Create an IOU between Alice and Bob for £10,000”</span>,
+ledger=<span class="st">“ginienet”</span>   <span class="cm"># or “localnet”, “mainnet”</span>
+)
+
+<span class="fn">print</span>(result.contract_id)   <span class="cm"># #1:00:abc3d7…f92a</span>
+<span class="fn">print</span>(result.cantonscan_url)
+<span class="fn">print</span>(result.audit_report)  <span class="cm"># Full 5-gate audit findings</span></pre>
+</div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONCEPTS -->
+
+<div class="doc-section" id="concepts">
+  <div class="section-eyebrow">Getting Started</div>
+  <h2 class="section-title">Core Concepts</h2>
+
+  <h3>What Ginie is</h3>
+  <p>Ginie is an AI pipeline that accepts plain English descriptions and produces deployed Canton smart contracts. It is not a code editor. It is not an AI assistant. It is a fully automated deployment system where the output is a live Contract ID on a Canton ledger — not code to copy-paste.</p>
+
+  <h3>GinieNet</h3>
+  <p>GinieNet is a public Canton sandbox operated by BlockX AI. Any user can deploy contracts to GinieNet without DevNet credentials or a Canton account. Every Contract ID on GinieNet is real — verifiable on CantonScan. GinieNet is intended for prototyping and evaluation.</p>
+
+  <h3>Daml and Canton — brief context</h3>
+  <p>Daml is a smart contract language built for financial workflows. Canton Network is the blockchain that runs Daml contracts. Normally, writing and deploying a Daml contract requires learning Daml (a Haskell-derived language with strict type rules and party semantics), installing the Canton SDK, and running several CLI commands. Ginie handles all of this for you.</p>
+
+  <div class="callout callout-warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <div class="callout-label warn-label">Scope</div>
+      Ginie generates <strong>single-module contracts of 50–200 lines</strong> — IOUs, bonds, repos, DvP, custody, multi-party settlements. It does not generate multi-module enterprise Daml packages or daml-finance interface extensions. See <a onclick="goto('scope')">Scope & Limitations</a> for the full picture.
+    </div>
+  </div>
+
+  <h3>The Daml SDK Ginie uses</h3>
+  <p>All contracts are compiled with <strong>Canton SDK 3.4</strong> using <code>dpm build</code> and <code>dpm test</code> — the official Digital Asset package manager. The Canton JSON Ledger API (port 7575) handles deployment. Every generated <code>daml.yaml</code> targets Canton SDK 3.4.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- PIPELINE -->
+
+<div class="doc-section" id="pipeline">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">The 7-Stage Pipeline</h2>
+  <p>Every generation runs through all 7 stages in sequence. The pipeline is built on LangChain + LangGraph with Claude claude-sonnet-4 as the primary LLM.</p>
+
+  <div class="pipeline-flow">
+    <div class="pipe-step"><div class="pipe-step-num">01</div><div class="pipe-step-name">Intent Agent</div><div class="pipe-step-sub">English → JSON spec</div></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step"><div class="pipe-step-num">02</div><div class="pipe-step-name">RAG Layer</div><div class="pipe-step-sub">Pattern retrieval</div></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step"><div class="pipe-step-num">03</div><div class="pipe-step-name">Writer Agent</div><div class="pipe-step-sub">Daml generation</div></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step"><div class="pipe-step-num">04</div><div class="pipe-step-name">Compile Agent</div><div class="pipe-step-sub">dpm build</div></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step"><div class="pipe-step-num">05</div><div class="pipe-step-name">Fix Agent</div><div class="pipe-step-sub">Auto-repair</div></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step"><div class="pipe-step-num">06</div><div class="pipe-step-name">Audit Layer</div><div class="pipe-step-sub">5-gate security</div></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step"><div class="pipe-step-num">07</div><div class="pipe-step-name">Deploy Agent</div><div class="pipe-step-sub">Canton Ledger API</div></div>
+  </div>
+
+  <h3>Stage-by-stage breakdown</h3>
+
+  <h4>01 — Intent Agent</h4>
+  <p>Parses your plain English prompt into a structured JSON contract specification. Identifies templates, parties, choices, fields, and preconditions. This spec is the input for the RAG layer and Writer Agent.</p>
+
+  <h4>02 — RAG Layer</h4>
+  <p>Retrieves the most relevant Daml patterns from the institutional pattern library (ChromaDB vector store). The retrieved patterns inform the Writer Agent's generation — providing idiomatic Daml structure for the contract type you're building.</p>
+
+  <h4>03 — Writer Agent</h4>
+  <p>Generates a complete, idiomatic Daml module based on the intent spec and retrieved patterns. The output follows Canton SDK 3.4 conventions: correct signatory/observer/controller structure, proper choice syntax, SCU-aware field design.</p>
+
+  <h4>04 — Compile Agent</h4>
+  <p>Runs the real <code>dpm build</code> command against the generated Daml source. This is not a linter or syntax check — it is the actual Canton SDK compiler. If compilation fails, the error output is passed to the Fix Agent.</p>
+
+  <h4>05 — Fix Agent</h4>
+  <p>Handles compilation errors automatically. The Fix Agent recognises 11 error types and applies targeted fixes — not re-prompting from scratch. It retries up to 3 times before returning an error to the user.</p>
+
+  <table style="margin-top:8px">
+    <thead><tr><th>Error type</th><th>Example</th><th>Fix approach</th></tr></thead>
+    <tbody>
+      <tr><td>Missing signatory</td><td><code>Template has no signatories</code></td><td>Adds signatory from first party in spec</td></tr>
+      <tr><td>Type mismatch</td><td><code>Expected Party, got Text</code></td><td>Corrects type annotation</td></tr>
+      <tr><td>Unbound variable</td><td><code>Variable 'amount' not in scope</code></td><td>Adds field to template record</td></tr>
+      <tr><td>Missing import</td><td><code>Unknown module DA.Date</code></td><td>Adds missing import statement</td></tr>
+      <tr><td>Choice return type</td><td><code>Expected ContractId, got ()</code></td><td>Wraps return in correct type</td></tr>
+    </tbody>
+  </table>
+
+  <h4>06 — Audit Layer</h4>
+  <p>Runs the 5-gate pre-deployment security scan. See <a onclick="goto('audit')">Audit Layer</a> for the full gate documentation. Any CRITICAL finding blocks deployment and returns the finding to you with a specific explanation.</p>
+
+  <h4>07 — Deploy Agent</h4>
+  <p>Uploads the compiled DAR to Canton Ledger API, allocates the party, and returns the Contract ID and CantonScan link. The deploy target is determined by your selected ledger: <code>ginienet</code>, <code>localnet</code>, or <code>mainnet</code>.</p>
+
+  <div class="diagram-wrap">
+    <div class="mermaid">
+flowchart LR
+  A["User prompt"] --> B["Intent Agent\nJSON spec"]
+  B --> C["RAG Layer\nPattern retrieval"]
+  C --> D["Writer Agent\nDaml source"]
+  D --> E["Compile Agent\ndpm build"]
+  E --> F{Pass?}
+  F -->|No · max 3x| G["Fix Agent"]
+  G --> E
+  F -->|Yes| H["Audit Layer\n5 gates"]
+  H --> I{All pass?}
+  I -->|Critical finding| J["Blocked\nFinding returned"]
+  I -->|Pass| K["Deploy Agent\nCanton Ledger API"]
+  K --> L["Contract ID\n+ CantonScan link"]
+    </div>
+    <div class="diagram-caption">Fig 1 — Full pipeline flow with compile retry loop and audit gate</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- RAG -->
+
+<div class="doc-section" id="rag">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">RAG & Pattern Library</h2>
+  <p>The RAG (Retrieval-Augmented Generation) layer is what makes Ginie's Daml output idiomatic. Instead of generating from scratch, the Writer Agent retrieves the closest matching patterns from a curated library of validated institutional Daml contracts.</p>
+
+  <h3>What's in the pattern library</h3>
+  <p>The library is sourced from production-grade Daml repositories and validated by senior Daml engineers against Canton SDK 3.4:</p>
+  <ul class="tick-list">
+    <li>digital-asset/daml — official Daml examples and stdlib patterns</li>
+    <li>digital-asset/daml-finance — financial instrument templates (bond, repo, DvP, cash)</li>
+    <li>digital-asset/splice — Splice protocol patterns and Canton utilities</li>
+    <li>digital-asset/cn-quickstart — Canton application scaffolding patterns</li>
+    <li>digital-asset/ex-models — extended Daml model examples</li>
+    <li>Community-contributed patterns via Canton Skills (MIT, Apache 2.0)</li>
+  </ul>
+
+  <h3>Canton Skills</h3>
+  <p><a href="https://github.com/BlockX-AI/Canton_skills" target="_blank">Canton Skills</a> is a separately published npm package (<code>npx canton-skills install</code>) that provides a structured knowledge base for AI coding agents. It covers Canton SDK 3.4, Splice 0.5.0, DPM, CIP-0103, CIP-0056, PQS, TypeScript frontend patterns, and deprecated API guardrails. In Ginie, Canton Skills functions as the primary knowledge layer for both the Writer Agent and Fix Agent.</p>
+
+  <div class="callout callout-tip">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <div class="callout-label tip-label">Using Canton Skills independently</div>
+      Canton Skills works standalone. If you use Claude Code, Codex, or Cursor to write Daml, run <code>npx canton-skills install</code> to give your AI assistant the same Canton knowledge base Ginie uses internally.
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- AUDIT -->
+
+<div class="doc-section" id="audit">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">Audit Layer</h2>
+  <p>Every Ginie-generated contract passes a 5-gate pre-deployment security scan before any DAR is uploaded to the Canton ledger. A single CRITICAL finding blocks deployment entirely. The finding is returned to you with a specific, line-level explanation.</p>
+
+  <div class="callout callout-info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      The audit layer is what separates AI-generated Daml from manually-written Daml in terms of safety. AI models have specific failure modes — particularly around Canton's party and authorization model. The gates are designed around these known failure modes.
+    </div>
+  </div>
+
+  <div class="gate-list">
+    <div class="gate-item">
+      <div class="gate-badge"><span class="badge badge-red">Gate 1</span></div>
+      <div class="gate-body">
+        <div class="gate-title">Signatory presence check</div>
+        <div class="gate-desc">Every template must have at least one signatory. A template with zero signatories cannot create contracts on Canton — deployment would succeed but the contract would be unusable.</div>
+        <div class="gate-example">CRITICAL: Template Bond has no signatories — contracts cannot be created on this template.</div>
+      </div>
+    </div>
+    <div class="gate-item">
+      <div class="gate-badge"><span class="badge badge-red">Gate 2</span></div>
+      <div class="gate-body">
+        <div class="gate-title">Controller–signatory validation</div>
+        <div class="gate-desc">Choice controllers must appear in the template's signatories (or be explicitly justified with an observer pattern). A controller not in signatories can exercise a choice without the asset owner's authorization — a critical vulnerability.</div>
+        <div class="gate-example">CRITICAL: Choice Iou_Transfer: controller Alice is not in signatories. This choice can be exercised without asset owner authorization. Deployment blocked.</div>
+      </div>
+    </div>
+    <div class="gate-item">
+      <div class="gate-badge"><span class="badge badge-amber">Gate 3</span></div>
+      <div class="gate-body">
+        <div class="gate-title">Unguarded choice analysis</div>
+        <div class="gate-desc">Choices without <code>ensure</code> clauses that could be exercised in invalid contract states. These generate warnings, not blocks — the contract deploys but the finding is returned so you can evaluate the risk.</div>
+        <div class="gate-example">WARNING: Choice Settle has no ensure clause — may execute on contracts in an invalid settlement state.</div>
+      </div>
+    </div>
+    <div class="gate-item">
+      <div class="gate-badge"><span class="badge badge-amber">Gate 4</span></div>
+      <div class="gate-body">
+        <div class="gate-title">Known anti-pattern matching</div>
+        <div class="gate-desc">Checks for hardcoded party strings, missing divulgence controls, non-atomic workflows, and other known Daml anti-patterns. Generates warnings on findings.</div>
+        <div class="gate-example">WARNING: Hardcoded party string "Alice" found in template — use a parameter instead for reusability.</div>
+      </div>
+    </div>
+    <div class="gate-item">
+      <div class="gate-badge"><span class="badge badge-blue">Gate 5</span></div>
+      <div class="gate-body">
+        <div class="gate-title">SCU upgrade compatibility</div>
+        <div class="gate-desc">Validates that the generated contract follows Smart Contract Upgrade (SCU) rules — additive-only field structure, correct <code>@daml.upgrade</code> annotation usage, valid version string format. Every export includes <code>UPGRADE_NOTES.md</code>.</div>
+        <div class="gate-example">UPGRADE_FAIL: Field 'maturityDate' removed from Bond template — non-additive change blocks SCU compatibility. Deployment blocked.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>What happens when a gate fails</h3>
+  <p>CRITICAL findings (Gates 1, 2, and 5 on certain findings) block deployment. The pipeline stops, and you receive the specific finding with a recommended fix. You can then iterate on your prompt to resolve the issue — Ginie will regenerate with awareness of the previous finding.</p>
+  <p>WARNING findings (Gates 3, 4, and Gate 5 on non-critical findings) do not block deployment. They are returned alongside the Contract ID so you can make an informed decision about whether to act on them.</p>
+
+  <h3>Reading the audit report</h3>
+  <p>The full audit report is returned with every successful deployment and is included in the project export bundle as <code>AUDIT_REPORT.md</code>. In the M2 GitHub integration, the audit report is also automatically posted as a comment on every pull request.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- SCU -->
+
+<div class="doc-section" id="scu">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">SCU Compatibility</h2>
+  <p>Smart Contract Upgrade (SCU) is Canton's on-chain contract upgrade mechanism. Every Ginie-generated contract is SCU-compatible from the first deployment — meaning it can be upgraded on-chain without downtime or manual migration of active contracts.</p>
+
+  <h3>Why this matters</h3>
+  <p>A contract that was not designed for SCU from the start cannot be upgraded on Canton without first archiving all active contracts and recreating them under the new template. For production financial systems, this means taking a workflow offline. SCU eliminates this entirely — but only if the original contract was built correctly.</p>
+
+  <h3>What Ginie enforces by default</h3>
+  <ul class="tick-list">
+    <li>All new fields added to templates are <code>Optional</code> — new fields cannot break existing contracts</li>
+    <li>No field removals or renames — additive-only evolution</li>
+    <li><code>@daml.upgrade</code> annotation structure is applied to upgrading modules</li>
+    <li><code>daml.yaml</code> version string uses proper semver format — not hardcoded <code>0.0.1</code></li>
+    <li>Every export bundle includes <code>UPGRADE_NOTES.md</code> documenting the upgrade path</li>
+  </ul>
+
+  <h3>The SCU Upgrade Agent (M2)</h3>
+  <p>When you need to modify an already-deployed contract, the SCU Upgrade Agent handles the upgrade lifecycle. You provide your existing <code>.daml</code> source, the current version, and a description of your modification. The agent generates the upgraded version, validates it is additive-only, bumps the <code>daml.yaml</code> version, and produces both the upgraded contract and an <code>UPGRADE_NOTES.md</code> explaining how active contracts are migrated.</p>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">python</span></div>
+    <div class="code-body"><pre><span class="cm"># M2+ — Upgrade an existing deployed contract</span>
+result = client.<span class="fn">upgrade</span>(
+    source_file=<span class="st">"./Bond.daml"</span>,
+    current_version=<span class="st">"0.0.1"</span>,
+    modification=<span class="st">"add an optional maturityExtension field of type Optional Date"</span>
+)
+
+<span class="cm"># result.new_source      — upgraded .daml with upgradeFrom annotation</span>
+<span class="cm"># result.daml_yaml       — bumped to version 0.0.2</span>
+<span class="cm"># result.upgrade_notes   — UPGRADE_NOTES.md for active contract migration</span>
+<span class="cm"># result.validation      — confirms additive-only change</span></pre>
+</div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TEMPLATES -->
+
+<div class="doc-section" id="templates">
+  <div class="section-eyebrow">Features</div>
+  <h2 class="section-title">Contract Templates</h2>
+  <p>Ginie ships with 20 validated institutional contract templates — each with a live Contract ID on GinieNet that you can verify on CantonScan before deploying your own version.</p>
+
+  <table>
+    <thead><tr><th>Template</th><th>Description</th><th>Typical complexity</th></tr></thead>
+    <tbody>
+      <tr><td>IOU</td><td>Simple bilateral debt obligation with transfer and settle choices</td><td>~60 lines</td></tr>
+      <tr><td>Token Transfer</td><td>Fungible asset transfer between two parties with atomic settlement</td><td>~80 lines</td></tr>
+      <tr><td>Bond</td><td>Debt instrument with issuer, holder, coupon, maturity</td><td>~120 lines</td></tr>
+      <tr><td>Repo Agreement</td><td>Securities repurchase with initial sale and repurchase choices</td><td>~140 lines</td></tr>
+      <tr><td>DvP (Delivery vs Payment)</td><td>Atomic exchange of asset against cash — two-leg settlement</td><td>~160 lines</td></tr>
+      <tr><td>Custody</td><td>Asset custody arrangement with client, custodian, and instruction choices</td><td>~130 lines</td></tr>
+      <tr><td>AML Attestation</td><td>KYC/AML compliance attestation with regulator observer</td><td>~90 lines</td></tr>
+      <tr><td>Multi-Party Settlement</td><td>Three-party workflow with sequenced approval and settlement</td><td>~180 lines</td></tr>
+      <tr><td>Escrow</td><td>Conditional payment held by neutral third party</td><td>~110 lines</td></tr>
+      <tr><td>Subscription</td><td>Recurring payment obligation with cancel and renew choices</td><td>~95 lines</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-tip">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <div class="callout-label tip-label">Using templates as a starting point</div>
+      You can describe a template variant in your prompt — <em>"Create a bond like the standard template but with a floating rate coupon and an optional early redemption choice"</em> — and Ginie will use the bond template as the RAG foundation while applying your modifications.
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DAPP BUILDER -->
+
+<div class="doc-section" id="dapp">
+  <div class="section-eyebrow">Features</div>
+  <h2 class="section-title">Full-Stack dApp Builder</h2>
+  <p>Available from M2. Ginie can generate a complete full-stack Canton dApp — a Daml contract layer plus a Next.js frontend with CIP-0103 wallet connectivity — from a single English prompt.</p>
+
+  <h3>What gets generated</h3>
+  <ul class="tick-list">
+    <li>Daml smart contract module (compiled, audited, deployed)</li>
+    <li>IDL JSON spec (<code>schemas/idl-spec.json</code>) — the canonical interface description</li>
+    <li>Complete Next.js frontend using <code>@canton-network/dapp-sdk</code></li>
+    <li>CIP-0103 wallet connection (SubWallet compatible)</li>
+    <li>Hosted on a <code>mydamldapp.ginie.dev</code> subdomain — live and accessible</li>
+    <li>Full project export bundle — deployable to Vercel with zero modification</li>
+  </ul>
+
+  <h3>The IDL Extractor</h3>
+  <p>The IDL (Interface Definition Language) Extractor reads your deployed Daml source and produces a structured JSON file describing all templates, choices, parties, and field types. The Frontend Agent uses this JSON to generate a React frontend that correctly models every contract interaction — buttons for each choice, party selectors, field inputs for each template field.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- GITHUB -->
+
+<div class="doc-section" id="github">
+  <div class="section-eyebrow">Features</div>
+  <h2 class="section-title">GitHub Integration</h2>
+  <p>Available from M2. Every Ginie generation can automatically commit the full project to a GitHub repository in your account. You own the code. Ginie is just the tool that generated the starting point.</p>
+
+  <h3>What gets committed</h3>
+  <table>
+    <thead><tr><th>File</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td><code>src/Main.daml</code></td><td>Full generated Daml source</td></tr>
+      <tr><td><code>daml.yaml</code></td><td>Canton SDK 3.4 configuration with correct version string</td></tr>
+      <tr><td><code>AUDIT_REPORT.md</code></td><td>Complete 5-gate audit findings</td></tr>
+      <tr><td><code>UPGRADE_NOTES.md</code></td><td>SCU upgrade path documentation</td></tr>
+      <tr><td><code>Makefile</code></td><td><code>make build</code>, <code>make test</code>, <code>make deploy</code> — zero Ginie dependency</td></tr>
+      <tr><td><code>README.md</code></td><td>Contract description, party setup, deployment instructions</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Iterating creates pull requests</h3>
+  <p>When you click <strong>Iterate</strong> to modify a deployed contract, Ginie creates a new branch, applies the changes, and opens a pull request against your repo. The PR includes a diff of what changed, and the new audit report is posted as a PR comment. Gate 5 runs against the new version — if the change violates SCU compatibility, the PR is flagged before you merge.</p>
+
+  <h3>Recompilation independence</h3>
+  <p>Every generated repo includes a <code>Makefile</code> with <code>make build</code>, <code>make test</code>, and <code>make deploy</code>. Once a contract is in your GitHub repo, you can compile, test, and redeploy it with standard Canton SDK tooling — no Ginie required, ever.</p>
+
+  <div class="diagram-wrap">
+    <div class="mermaid">
+flowchart TD
+  A["Generate contract"] --> B["OAuth: connect GitHub\non first generation"]
+  B --> C["Auto-commit:\nDaml + daml.yaml +\nAudit report + UPGRADE_NOTES.md + Makefile"]
+  C --> D["User owns the code\nFull git history"]
+  D --> E["Click Iterate\n'add maturityExtension field'"]
+  E --> F["New branch\n0.0.1 → 0.0.2"]
+  F --> G["SCU validation\nadditive-only check"]
+  G --> H["Pull request opened\nDiff + audit report\nas PR comment"]
+  H --> I["User reviews\nand merges"]
+    </div>
+    <div class="diagram-caption">Fig 2 — GitHub integration: auto-commit on generation, PR on iterate</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MCP -->
+
+<div class="doc-section" id="mcp">
+  <div class="section-eyebrow">Features</div>
+  <h2 class="section-title">MCP Server</h2>
+  <p>Available from M2. Ginie exposes a Model Context Protocol (MCP) server that integrates with Jatin Pandya's Build-on-Canton MCP tools. This wires live Canton documentation and tooling into Ginie's pipeline agents.</p>
+
+  <h3>Available MCP tools</h3>
+  <table>
+    <thead><tr><th>Tool</th><th>What it does</th><th>Used by</th></tr></thead>
+    <tbody>
+      <tr><td><code>canton_lookup</code></td><td>Queries live Canton documentation and API reference</td><td>RAG Layer — augments pattern retrieval with live docs</td></tr>
+      <tr><td><code>canton_check</code></td><td>Validates Daml code against current Canton SDK rules and deprecation registry</td><td>Fix Agent — surfaces deprecated patterns before compilation</td></tr>
+      <tr><td><code>canton_network_info</code></td><td>Returns current Canton Network state, active synchronizers, and ledger metadata</td><td>Deploy Agent — confirms deployment target before DAR upload</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Using the Ginie MCP in your own tools</h3>
+  <p>The Ginie MCP server is available as a standalone tool for Claude Code, Codex, or Cursor. If you write Daml directly in your IDE, you can connect to the Ginie MCP to access the same Canton knowledge base and validation tools Ginie uses internally.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- IDE -->
+
+<div class="doc-section" id="ide">
+  <div class="section-eyebrow">Features</div>
+  <h2 class="section-title">IDE Extensions</h2>
+  <p>Available from M3. Ginie ships IDE extensions for VS Code, Cursor, and JetBrains. The extensions bring Ginie's generation and audit capabilities directly into your development environment.</p>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="card-icon">🔷</div>
+      <div class="card-title">VS Code</div>
+      <div class="card-desc">Inline Daml generation, deploy from command palette, audit sidebar showing gate findings in real time.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Cursor</div>
+      <div class="card-desc">Native Cursor integration using the Ginie MCP server. AI-powered Daml generation with Canton Skills knowledge.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <div class="card-title">JetBrains</div>
+      <div class="card-desc">IntelliJ IDEA plugin with Ginie generation, Canton SDK integration, and audit findings in the inspection panel.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SDK -->
+
+<div class="doc-section" id="sdk">
+  <div class="section-eyebrow">SDK & Self-Hosting</div>
+  <h2 class="section-title">Python SDK</h2>
+  <p>The Ginie Python SDK lets you script contract generation and deployment programmatically.</p>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">bash</span></div>
+    <div class="code-body"><pre><span class="cmd">pip install ginie</span></pre>
+    </div>
+  </div>
+
+  <h3>Core methods</h3>
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">python</span></div>
+    <div class="code-body"><pre><span class="kw">from</span> ginie <span class="kw">import</span> GinieClient
+
+client = <span class="fn">GinieClient</span>(api_key=<span class="st">“your-key”</span>)
+
+<span class="cm"># Deploy a contract from a prompt</span>
+result = client.<span class="fn">deploy</span>(
+prompt=<span class="st">“Create a bond with issuer Alice, holder Bob, £50,000 principal”</span>,
+ledger=<span class="st">“ginienet”</span>,  <span class="cm"># ginienet | localnet | mainnet</span>
+lmm=<span class="st">“claude”</span>       <span class="cm"># claude | gpt4o | gemini | ginie1</span>
+)
+result.contract_id      <span class="cm"># str  — Canton Contract ID</span>
+result.cantonscan_url   <span class="cm"># str  — CantonScan link</span>
+result.daml_source      <span class="cm"># str  — full .daml source</span>
+result.audit_report     <span class="cm"># dict — 5-gate findings</span>
+result.dar_path         <span class="cm"># str  — path to compiled .dar</span>
+
+<span class="cm"># Iterate on an existing contract</span>
+v2 = client.<span class="fn">iterate</span>(
+job_id=result.job_id,
+prompt=<span class="st">“Add an early redemption choice callable by Alice only”</span>
+)
+
+<span class="cm"># Audit only — no deployment</span>
+audit = client.<span class="fn">audit</span>(daml_source=result.daml_source)
+audit.gates             <span class="cm"># list[GateFinding]</span>
+audit.critical_count    <span class="cm"># int</span>
+audit.passed            <span class="cm"># bool</span></pre>
+</div>
+
+  </div>
+
+  <h3>Selecting the LLM</h3>
+  <p>The pipeline is model-agnostic. You can select between Claude claude-sonnet-4 (default, highest compile rates), GPT-4o, Gemini 2.5 Flash, or — from M4 — Ginie-1 (the Canton-native open-weight model).</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- SELF-HOSTING -->
+
+<div class="doc-section" id="selfhost">
+  <div class="section-eyebrow">SDK & Self-Hosting</div>
+  <h2 class="section-title">Self-Hosting</h2>
+  <p>Ginie is open-source (Apache 2.0) and self-hostable. Run the full pipeline on your own infrastructure using Docker.</p>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">bash</span></div>
+    <div class="code-body"><pre><span class="cm"># Clone the repo</span>
+<span class="cmd">git clone https://github.com/BlockX-AI/Canton_Ginie</span>
+<span class="cmd">cd Canton_Ginie</span>
+
+<span class="cm"># Configure environment</span>
+<span class="cmd">cp .env.example .env.ginie</span>
+<span class="cm"># Set ANTHROPIC_API_KEY, CANTON_LEDGER_HOST, POSTGRES_URL</span>
+
+<span class="cm"># Start all services</span>
+<span class="cmd">docker-compose up -d</span>
+
+<span class="cm"># The API is now available at localhost:8000</span>
+<span class="cm"># Canton LocalNet sandbox at localhost:6865</span></pre>
+</div>
+
+  </div>
+
+  <h3>Services started by docker-compose</h3>
+  <table>
+    <thead><tr><th>Service</th><th>Port</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>ginie-api</code></td><td>8000</td><td>FastAPI backend — REST API and job queue</td></tr>
+      <tr><td><code>canton-sandbox</code></td><td>6865</td><td>Canton LocalNet — Ledger API endpoint</td></tr>
+      <tr><td><code>postgres</code></td><td>5432</td><td>Job history, party registry, deployed contracts</td></tr>
+      <tr><td><code>redis</code></td><td>6379</td><td>Celery job queue and session state</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- GINIE-1 -->
+
+<div class="doc-section" id="ginie1">
+  <div class="section-eyebrow">SDK & Self-Hosting</div>
+  <h2 class="section-title">Ginie-1 (Air-Gapped)</h2>
+  <p>Ginie-1 is a Canton-native open-weight language model, fine-tuned on Daml with RLCF using real Canton compiler feedback as the reward signal. Available from M4.</p>
+
+  <div class="callout callout-info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <div class="callout-label info-label">Who Ginie-1 is for</div>
+      Ginie-1 is designed for regulated institutions — banks, asset managers, infrastructure providers — who cannot route financial contract specifications through an external API provider. Ginie-1 runs fully air-gapped: no network call, no data leaving your infrastructure, no third-party dependency.
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Base model</td><td>Mistral 7B or Qwen 2.5-Coder</td></tr>
+      <tr><td>Training</td><td>SFT 3-epoch + 5-round RLCF on Canton compiler feedback</td></tr>
+      <tr><td>Target accuracy</td><td>≥95% first-pass compile rate on ginie-eval benchmark</td></tr>
+      <tr><td>Runtime format</td><td>GGUF / ONNX — CPU inference, no GPU required</td></tr>
+      <tr><td>Deployment</td><td>Single Docker image — pull and run on your own server</td></tr>
+      <tr><td>License</td><td>Apache 2.0 — weights published on HuggingFace</td></tr>
+      <tr><td>Cost</td><td>Free — no API key, no per-call billing after deployment</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Running Ginie-1 locally</h3>
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">bash</span></div>
+    <div class="code-body"><pre><span class="cm"># Pull the air-gapped Docker image (available M4+)</span>
+<span class="cmd">docker pull blockxai/ginie-1:latest</span>
+<span class="cmd">docker run -p 8001:8001 blockxai/ginie-1:latest</span>
+
+<span class="cm"># Use Ginie-1 as the LLM in the Ginie SDK</span>
+<span class="cmd">client = GinieClient(llm=“ginie1”, llm_host=“http://localhost:8001”)</span></pre>
+</div>
+
+  </div>
+
+  <h3>The ginie-eval benchmark</h3>
+  <p>ginie-eval is a public Apache 2.0 benchmark for evaluating Canton AI models. It consists of 50 canonical prompts across all institutional contract types, evaluated against 5 criteria: compile rate, ledger correctness, audit pass rate, pattern fidelity, and RLCF improvement delta. Any model (Claude, GPT-4o, Ginie-1, or your own fine-tune) can be evaluated against the same benchmark.</p>
+  <div class="terminal">
+    <pre><span class="cmd">git clone https://github.com/BlockX-AI/ginie-eval</span>
+<span class="cmd">cd ginie-eval && pip install -r requirements.txt</span>
+<span class="cmd">python run_eval.py --model ginie1 --endpoint http://localhost:8001</span>
+<span class="out">
+Running 50 prompts across 5 evaluation criteria...
+Compile rate:        96.0%  (48/50)
+Audit pass rate:     94.0%  (47/50)
+Ledger correctness:  92.0%  (46/50)
+Pattern fidelity:    88.0%  (44/50)
+─────────────────────────────────────
+Overall:             92.5%</span></pre>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SCOPE -->
+
+<div class="doc-section" id="scope">
+  <div class="section-eyebrow">Reference</div>
+  <h2 class="section-title">Scope & Limitations</h2>
+  <p>Ginie is honest about what it does and doesn't do. Understanding these boundaries will help you decide when Ginie is the right tool.</p>
+
+  <h3>What Ginie handles well</h3>
+  <ul class="tick-list">
+    <li>Single-module Daml contracts of 50–200 lines</li>
+    <li>Bilateral and 2–3 party workflows</li>
+    <li>Standard financial contract patterns: IOU, bond, repo, DvP, custody, AML, settlement</li>
+    <li>Standard choice structures: transfer, settle, archive, propose/accept</li>
+    <li>SCU-safe contracts designed for on-chain upgrade from day one</li>
+    <li>Full project export — contracts you can own, maintain, and extend independently</li>
+  </ul>
+
+  <h3>Current limitations</h3>
+  <div class="callout callout-warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <div class="callout-label warn-label">Known boundaries</div>
+      <strong>No cross-module imports.</strong> Each generated module is standalone. Multi-module Daml packages with cross-references are not yet supported.<br><br>
+      <strong>No daml-finance interface extensions.</strong> Ginie cannot generate contracts that extend <code>Daml.Finance.Interface.*</code> types. This is on the M3 roadmap.<br><br>
+      <strong>Ginie is not a replacement for a Daml engineer</strong> on production-grade bespoke contracts. It generates the starting point — the prototype that a Daml team then owns and extends.
+    </div>
+  </div>
+
+  <h3>What Ginie is not</h3>
+  <ul class="tick-list">
+    <li>Not a cloud IDE or terminal emulator</li>
+    <li>Not a Daml language assistant or documentation chatbot</li>
+    <li>Not a replacement for Daml Autopilot (which serves existing Daml developers)</li>
+    <li>Not a replacement for splice or multi-module enterprise Daml packages</li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+
+<div class="doc-section" id="faq">
+  <div class="section-eyebrow">Reference</div>
+  <h2 class="section-title">FAQ</h2>
+
+  <h3>Do I need a Canton account or credentials?</h3>
+  <p>No. GinieNet is a public Canton sandbox — you can deploy contracts without any credentials. For deploying to Canton Mainnet or your own LocalNet, you will need the appropriate Canton party credentials.</p>
+
+  <h3>What LLM does Ginie use?</h3>
+  <p>Claude claude-sonnet-4 is the default — it produces the highest first-pass Daml compile rates in Ginie's production benchmark. You can switch to GPT-4o, Gemini 2.5 Flash, or (from M4) Ginie-1 using the <code>llm</code> parameter in the SDK or the model selector in the web UI.</p>
+
+  <h3>Is my contract source code stored?</h3>
+  <p>Generated Daml source and audit reports are stored temporarily for the duration of a session. With the M2 GitHub integration, your code is committed to a repository you own and control. On GinieNet, Contract IDs are stored for explorer access. You can delete your data via the dashboard.</p>
+
+  <h3>Can I use Ginie with my own Canton node?</h3>
+  <p>Yes. Set <code>CANTON_LEDGER_HOST</code> in your environment to point at your own Canton participant node. The deploy agent will target your node instead of GinieNet. Fully supported in self-hosted deployments.</p>
+
+  <h3>What happens if compilation fails after 3 retries?</h3>
+  <p>The pipeline returns the final compiler error alongside the generated Daml source so you can inspect what went wrong. You can then iterate with a more specific prompt or modify the source directly. In most cases, rephrasing the prompt with more explicit party and choice structure resolves the failure.</p>
+
+  <h3>Is the audit layer audited itself?</h3>
+  <p>The audit layer is open-source (Apache 2.0) and peer-reviewed by an external Daml specialist who validates each gate against real-world Canton vulnerability patterns. An external security audit of the full system (including auth, job isolation, JWT) is on the M3 roadmap.</p>
+
+  <h3>Can I contribute Daml patterns to the RAG library?</h3>
+  <p>Yes. Submit a PR to <a href="https://github.com/BlockX-AI/Canton_skills" target="_blank">Canton Skills</a> — the MIT-licensed companion library. Every merged pattern is validated against Canton SDK 3.4 by CI before entering the corpus. Merged patterns automatically propagate to Ginie's RAG layer via the <code>POST /admin/refresh-rag</code> endpoint.</p>
+</div>
+
+</div><!-- end content-inner -->
+</div><!-- end content -->
+</div><!-- end layout -->
+
+<script>
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'default',
+  themeVariables: {
+    primaryColor: '#f3f4f6',
+    primaryTextColor: '#111827',
+    primaryBorderColor: '#d1d5db',
+    lineColor: '#6b7280',
+    secondaryColor: '#f9fafb',
+    tertiaryColor: '#ffffff',
+    fontFamily: "'Inter', sans-serif",
+    fontSize: '12px',
+    edgeLabelBackground: '#f9fafb'
+  },
+  flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: true }
+});
+
+async function renderDiagrams() {
+  const stage = document.createElement('div');
+  stage.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:900px;visibility:hidden;';
+  document.body.appendChild(stage);
+  const nodes = Array.from(document.querySelectorAll('.mermaid'));
+  let counter = 0;
+  for (const node of nodes) {
+    const src = node.textContent.trim();
+    if (!src) continue;
+    const ph = document.createComment('ph');
+    node.parentNode.insertBefore(ph, node);
+    stage.appendChild(node);
+    try {
+      const id = 'mg' + (counter++);
+      const result = await mermaid.render(id, src);
+      const svgStr = result.svg || result;
+      node.innerHTML = svgStr;
+      const svg = node.querySelector('svg');
+      if (svg) { svg.removeAttribute('width'); svg.removeAttribute('height'); svg.style.maxWidth = '100%'; svg.style.height = 'auto'; }
+    } catch(e) {
+      node.innerHTML = '<p style="color:#dc2626;font-size:12px;padding:8px">Diagram error: ' + e.message + '</p>';
+    }
+    ph.parentNode.insertBefore(node, ph);
+    ph.parentNode.removeChild(ph);
+  }
+  document.body.removeChild(stage);
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderDiagrams);
+else renderDiagrams();
+
+function goto(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.pageYOffset - 76;
+  window.scrollTo({ top, behavior: 'smooth' });
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(i => {
+    const oc = i.getAttribute('onclick') || '';
+    if (oc.includes("'" + id + "'")) i.classList.add('active');
+  });
+}
+
+window.addEventListener('scroll', () => {
+  let current = 'intro';
+  document.querySelectorAll('.doc-section[id]').forEach(s => {
+    if (window.pageYOffset >= s.offsetTop - 100) current = s.id;
+  });
+  document.querySelectorAll('.nav-item').forEach(i => {
+    i.classList.remove('active');
+    const oc = i.getAttribute('onclick') || '';
+    if (oc.includes("'" + current + "'")) i.classList.add('active');
+  });
+});
+
+function copyCode(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'copied!';
+    setTimeout(() => btn.textContent = 'copy', 1500);
+  });
+}
+</script>
+
+</body>
+</html>
