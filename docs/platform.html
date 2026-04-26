@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SDK & Self-Hosting — Ginie Docs</title>
+  <link rel="icon" href="https://canton.ginie.xyz/ginie-logo.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="topbar-logo" href="./index.html">
+    <img src="https://canton.ginie.xyz/ginie-logo.ico" alt="Ginie" class="logo-img">
+    <span class="logo-name">Ginie</span>
+    <span class="logo-ver">v1.0</span>
+  </a>
+  <div class="search-wrap">
+    <svg class="search-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="12.5" y1="12.5" x2="17" y2="17"/></svg>
+    <input class="search-box" id="search-input" type="text" placeholder="Search docs…" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div class="topbar-right">
+    <a class="t-link" href="https://github.com/BlockX-AI/Canton_Ginie" target="_blank">GitHub</a>
+    <a class="t-btn" href="https://canton.ginie.xyz" target="_blank">Try Ginie →</a>
+    <button class="t-theme" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+      <svg id="theme-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="ns">
+      <div class="nst">Getting Started</div>
+      <a class="ni" href="./index.html"><div class="nd"></div>Introduction</a>
+      <a class="ni" href="./getting-started.html"><div class="nd"></div>Quick Start</a>
+      <a class="ni" href="./getting-started.html#core-concepts"><div class="nd"></div>Core Concepts</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">How It Works</div>
+      <a class="ni" href="./how-it-works.html"><div class="nd"></div>7-Stage Pipeline</a>
+      <a class="ni" href="./how-it-works.html#rag"><div class="nd"></div>RAG &amp; Pattern Library</a>
+      <a class="ni" href="./how-it-works.html#audit"><div class="nd"></div>Audit Layer</a>
+      <a class="ni" href="./how-it-works.html#scu"><div class="nd"></div>SCU Compatibility</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">Features</div>
+      <a class="ni" href="./features.html"><div class="nd"></div>Contract Templates</a>
+      <a class="ni" href="./features.html#explorer"><div class="nd"></div>Ledger Explorer</a>
+      <a class="ni" href="./features.html#dapp"><div class="nd"></div>dApp Builder</a>
+      <a class="ni" href="./features.html#github"><div class="nd"></div>GitHub Integration</a>
+      <a class="ni" href="./features.html#mcp"><div class="nd"></div>MCP Server</a>
+      <a class="ni" href="./features.html#ide"><div class="nd"></div>IDE Extensions</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">SDK &amp; Self-Hosting</div>
+      <a class="ni" href="./platform.html"><div class="nd"></div>Python SDK</a>
+      <a class="ni" href="./platform.html#selfhost"><div class="nd"></div>Self-Hosting</a>
+      <a class="ni" href="./platform.html#ginie1"><div class="nd"></div>Ginie-1 (Air-Gapped)</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">Reference</div>
+      <a class="ni" href="./reference.html"><div class="nd"></div>Scope &amp; Limitations</a>
+      <a class="ni" href="./reference.html#faq"><div class="nd"></div>FAQ</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="ci">
+
+      <!-- PYTHON SDK -->
+      <div class="ds" id="sdk">
+        <div class="eyebrow">SDK &amp; Self-Hosting</div>
+        <h1 class="section-title">Python SDK</h1>
+
+        <div class="cb">
+          <div class="cb-hdr"><span class="cb-lang">bash</span><button class="cb-copy">copy</button></div>
+          <div class="cb-body"><pre>pip install ginie</pre></div>
+        </div>
+
+        <h3>Full SDK reference</h3>
+        <div class="cb">
+          <div class="cb-hdr"><span class="cb-lang">python</span><button class="cb-copy">copy</button></div>
+          <div class="cb-body"><pre><span class="kw">from</span> ginie <span class="kw">import</span> GinieClient
+
+client = <span class="fn">GinieClient</span>(api_key=<span class="st">"your-key"</span>)
+
+<span class="cm"># Deploy a contract from a prompt</span>
+result = client.<span class="fn">deploy</span>(
+    prompt=<span class="st">"Create a bond with issuer Alice, holder Bob, £50,000 principal"</span>,
+    ledger=<span class="st">"ginienet"</span>,   <span class="cm"># ginienet | localnet | mainnet</span>
+    llm=<span class="st">"claude"</span>         <span class="cm"># claude | gpt4o | gemini | ginie1</span>
+)
+result.contract_id      <span class="cm"># str  — Canton Contract ID</span>
+result.cantonscan_url   <span class="cm"># str  — CantonScan verification link</span>
+result.daml_source      <span class="cm"># str  — full .daml source</span>
+result.audit_report     <span class="cm"># dict — 5-gate findings</span>
+result.dar_path         <span class="cm"># str  — path to compiled .dar file</span>
+result.job_id           <span class="cm"># str  — for iteration</span></pre>
+          </div>
+        </div>
+
+        <div class="cb">
+          <div class="cb-hdr"><span class="cb-lang">python — iterate</span><button class="cb-copy">copy</button></div>
+          <div class="cb-body"><pre><span class="cm"># Iterate on an existing contract</span>
+v2 = client.<span class="fn">iterate</span>(
+    job_id=result.job_id,
+    prompt=<span class="st">"Add an early redemption choice callable by Alice only"</span>
+)
+
+<span class="cm"># Audit only — no deployment</span>
+audit = client.<span class="fn">audit</span>(daml_source=result.daml_source)
+audit.gates             <span class="cm"># list[GateFinding]</span>
+audit.critical_count    <span class="cm"># int — number of CRITICAL findings</span>
+audit.passed            <span class="cm"># bool — True if no CRITICALs</span></pre>
+          </div>
+        </div>
+
+        <h3>Selecting the LLM</h3>
+        <p>The pipeline is model-agnostic. Claude Sonnet is the default — it produces the highest first-pass Daml compile rates in Ginie's production benchmark. You can switch to GPT-4o, Gemini 2.5 Flash, or (from M4) Ginie-1 using the <code>llm</code> parameter.</p>
+
+        <table>
+          <thead><tr><th>LLM</th><th>Key</th><th>Compile rate</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Claude Sonnet</td><td><code>claude</code></td><td>Highest (default)</td><td>Best first-pass compile rate in production</td></tr>
+            <tr><td>GPT-4o</td><td><code>gpt4o</code></td><td>High</td><td>Good alternative, slightly higher cost</td></tr>
+            <tr><td>Gemini 2.5 Flash</td><td><code>gemini</code></td><td>Medium-High</td><td>Fastest, best for rapid iteration</td></tr>
+            <tr><td>Ginie-1</td><td><code>ginie1</code></td><td>≥95% target</td><td>Air-gapped, M4 release</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Environment variables</h3>
+        <table>
+          <thead><tr><th>Variable</th><th>Required</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>GINIE_API_KEY</code></td><td>Yes (cloud)</td><td>Your Ginie API key — alternative to passing <code>api_key</code> in code</td></tr>
+            <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Self-hosted</td><td>Claude API key for self-hosted deployments using Claude</td></tr>
+            <tr><td><code>CANTON_LEDGER_HOST</code></td><td>Self-hosted</td><td>Override the Canton participant node endpoint</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- SELF-HOSTING -->
+      <div class="ds" id="selfhost">
+        <div class="eyebrow">SDK &amp; Self-Hosting</div>
+        <h2 class="section-title">Self-Hosting</h2>
+        <p>Ginie is open-source (Apache 2.0) and self-hostable. Run the full pipeline on your own infrastructure using Docker — ideal for regulated environments, private networks, or custom Canton node deployments.</p>
+
+        <div class="cb">
+          <div class="cb-hdr"><span class="cb-lang">bash</span><button class="cb-copy">copy</button></div>
+          <div class="cb-body"><pre><span class="cm"># Clone the repo</span>
+git clone https://github.com/BlockX-AI/Canton_Ginie
+cd Canton_Ginie
+
+<span class="cm"># Configure environment</span>
+cp .env.example .env.ginie
+<span class="cm"># Edit .env.ginie — set ANTHROPIC_API_KEY, CANTON_LEDGER_HOST, POSTGRES_URL</span>
+
+<span class="cm"># Start all services</span>
+docker-compose up -d
+<span class="cm"># API   → http://localhost:8000</span>
+<span class="cm"># Canton LocalNet → localhost:6865</span></pre>
+          </div>
+        </div>
+
+        <h3>Services</h3>
+        <table>
+          <thead><tr><th>Service</th><th>Port</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>ginie-api</code></td><td>8000</td><td>FastAPI backend — REST API and job queue (Celery)</td></tr>
+            <tr><td><code>canton-sandbox</code></td><td>6865</td><td>Canton LocalNet — full Daml Ledger API endpoint</td></tr>
+            <tr><td><code>postgres</code></td><td>5432</td><td>Job history, party registry, deployed contract log</td></tr>
+            <tr><td><code>redis</code></td><td>6379</td><td>Celery job queue and session state cache</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Required environment variables</h3>
+        <table>
+          <thead><tr><th>Variable</th><th>Example</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>ANTHROPIC_API_KEY</code></td><td><code>sk-ant-…</code></td><td>Required if using Claude as the LLM</td></tr>
+            <tr><td><code>CANTON_LEDGER_HOST</code></td><td><code>localhost:6865</code></td><td>Canton participant node gRPC endpoint</td></tr>
+            <tr><td><code>POSTGRES_URL</code></td><td><code>postgres://ginie:pass@postgres:5432/ginie</code></td><td>Job and party storage</td></tr>
+            <tr><td><code>REDIS_URL</code></td><td><code>redis://redis:6379</code></td><td>Celery broker URL</td></tr>
+            <tr><td><code>SECRET_KEY</code></td><td>random 32-byte hex</td><td>FastAPI session signing key</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout c-info">
+          <span class="c-icon">💡</span>
+          <div class="c-body">
+            <div class="c-label cl-green">Canton SDK inside Docker</div>
+            The <code>ginie-api</code> Docker image ships with Canton SDK 3.4 and <code>dpm</code> pre-installed. No additional SDK setup is needed when running via <code>docker-compose</code>.
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- GINIE-1 -->
+      <div class="ds" id="ginie1">
+        <div class="eyebrow">SDK &amp; Self-Hosting</div>
+        <h2 class="section-title">Ginie-1 (Air-Gapped)</h2>
+        <p>Ginie-1 is a Canton-native open-weight language model, fine-tuned on Daml with RLCF using real Canton compiler feedback as the reward signal. Available from M4.</p>
+
+        <div class="callout c-note">
+          <span class="c-icon">🔷</span>
+          <div class="c-body">
+            <div class="c-label cl-blue">Who Ginie-1 is for</div>
+            Ginie-1 is for regulated institutions — banks, asset managers, infrastructure providers — who cannot route financial contract specifications through an external API. Ginie-1 runs fully air-gapped: no network call, no data leaving your infrastructure, no third-party LLM dependency.
+          </div>
+        </div>
+
+        <table>
+          <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Base model</td><td>Mistral 7B or Qwen 2.5-Coder (configurable)</td></tr>
+            <tr><td>Training</td><td>SFT 3-epoch + 5-round RLCF on Canton compiler feedback</td></tr>
+            <tr><td>Target accuracy</td><td>≥95% first-pass compile rate on <code>ginie-eval</code> benchmark</td></tr>
+            <tr><td>Runtime format</td><td>GGUF / ONNX — CPU inference, no GPU required</td></tr>
+            <tr><td>Deployment</td><td>Single Docker image — pull and run on your own server</td></tr>
+            <tr><td>License</td><td>Apache 2.0 — weights published on HuggingFace</td></tr>
+            <tr><td>Cost</td><td>Free — no API key, no per-call billing after deployment</td></tr>
+          </tbody>
+        </table>
+
+        <div class="cb">
+          <div class="cb-hdr"><span class="cb-lang">bash</span><button class="cb-copy">copy</button></div>
+          <div class="cb-body"><pre><span class="cm"># Pull and start Ginie-1</span>
+docker pull blockxai/ginie-1:latest
+docker run -p 8001:8001 blockxai/ginie-1:latest
+
+<span class="cm"># Use Ginie-1 as the LLM in the SDK</span>
+client = GinieClient(llm=<span class="st">"ginie1"</span>, llm_host=<span class="st">"http://localhost:8001"</span>)</pre>
+          </div>
+        </div>
+
+        <h3>Benchmark: ginie-eval</h3>
+        <p>Ginie-1 is evaluated against <code>ginie-eval</code> — a 50-prompt benchmark covering all 10 standard contract templates at two difficulty levels (standard and complex). Metrics reported:</p>
+        <ul class="tl">
+          <li><strong>Compile rate</strong> — percentage of first-pass compilations without Fix Agent</li>
+          <li><strong>Audit pass rate</strong> — percentage passing all 5 security gates</li>
+          <li><strong>Ledger correctness</strong> — percentage producing a verifiable live Contract ID</li>
+        </ul>
+
+        <div class="term">
+          <pre><span class="cmd">$ ginie-eval --model ginie1 --prompts 50</span>
+<span class="out">Running ginie-eval v1.0 against Ginie-1...</span>
+<span class="out">────────────────────────────────────────</span>
+<span class="hi">Compile rate (first-pass): 96.0%</span>
+<span class="hi">Audit pass rate:           94.0%</span>
+<span class="hi">Ledger correctness:        92.0%</span>
+<span class="out">────────────────────────────────────────</span>
+<span class="out">Benchmark complete · 50/50 prompts processed</span></pre>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <a class="pn-link" href="./features.html">
+          <span class="pn-dir">← Previous</span>
+          <span class="pn-title">Features</span>
+          <span class="pn-desc">Templates, Explorer, GitHub &amp; more</span>
+        </a>
+        <a class="pn-link next" href="./reference.html">
+          <span class="pn-dir">Next →</span>
+          <span class="pn-title">Reference</span>
+          <span class="pn-desc">Scope, Limitations &amp; FAQ</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="./assets/app.js"></script>
+</body>
+</html>
