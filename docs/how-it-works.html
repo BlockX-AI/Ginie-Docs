@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works — Ginie Docs</title>
+  <link rel="icon" href="https://canton.ginie.xyz/ginie-logo.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="topbar-logo" href="./index.html">
+    <img src="https://canton.ginie.xyz/ginie-logo.ico" alt="Ginie" class="logo-img">
+    <span class="logo-name">Ginie</span>
+    <span class="logo-ver">v1.0</span>
+  </a>
+  <div class="search-wrap">
+    <svg class="search-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="12.5" y1="12.5" x2="17" y2="17"/></svg>
+    <input class="search-box" id="search-input" type="text" placeholder="Search docs…" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div class="topbar-right">
+    <a class="t-link" href="https://github.com/BlockX-AI/Canton_Ginie" target="_blank">GitHub</a>
+    <a class="t-btn" href="https://canton.ginie.xyz" target="_blank">Try Ginie →</a>
+    <button class="t-theme" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+      <svg id="theme-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="ns">
+      <div class="nst">Getting Started</div>
+      <a class="ni" href="./index.html"><div class="nd"></div>Introduction</a>
+      <a class="ni" href="./getting-started.html"><div class="nd"></div>Quick Start</a>
+      <a class="ni" href="./getting-started.html#core-concepts"><div class="nd"></div>Core Concepts</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">How It Works</div>
+      <a class="ni" href="./how-it-works.html"><div class="nd"></div>7-Stage Pipeline</a>
+      <a class="ni" href="./how-it-works.html#rag"><div class="nd"></div>RAG &amp; Pattern Library</a>
+      <a class="ni" href="./how-it-works.html#audit"><div class="nd"></div>Audit Layer</a>
+      <a class="ni" href="./how-it-works.html#scu"><div class="nd"></div>SCU Compatibility</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">Features</div>
+      <a class="ni" href="./features.html"><div class="nd"></div>Contract Templates</a>
+      <a class="ni" href="./features.html#explorer"><div class="nd"></div>Ledger Explorer</a>
+      <a class="ni" href="./features.html#dapp"><div class="nd"></div>dApp Builder</a>
+      <a class="ni" href="./features.html#github"><div class="nd"></div>GitHub Integration</a>
+      <a class="ni" href="./features.html#mcp"><div class="nd"></div>MCP Server</a>
+      <a class="ni" href="./features.html#ide"><div class="nd"></div>IDE Extensions</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">SDK &amp; Self-Hosting</div>
+      <a class="ni" href="./platform.html"><div class="nd"></div>Python SDK</a>
+      <a class="ni" href="./platform.html#selfhost"><div class="nd"></div>Self-Hosting</a>
+      <a class="ni" href="./platform.html#ginie1"><div class="nd"></div>Ginie-1 (Air-Gapped)</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">Reference</div>
+      <a class="ni" href="./reference.html"><div class="nd"></div>Scope &amp; Limitations</a>
+      <a class="ni" href="./reference.html#faq"><div class="nd"></div>FAQ</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="ci">
+
+      <!-- PIPELINE -->
+      <div class="ds" id="pipeline">
+        <div class="eyebrow">How It Works</div>
+        <h1 class="section-title">The 7-Stage Pipeline</h1>
+        <p>Every generation runs through all 7 stages in sequence. The pipeline is built on LangChain + LangGraph with Claude Sonnet as the primary LLM.</p>
+
+        <div class="pipe-strip">
+          <div class="pipe-node"><div class="pipe-n">01</div><div class="pipe-name">Intent Agent</div><div class="pipe-sub">English → JSON spec</div></div>
+          <div class="pipe-node"><div class="pipe-n">02</div><div class="pipe-name">RAG Layer</div><div class="pipe-sub">Pattern retrieval</div></div>
+          <div class="pipe-node"><div class="pipe-n">03</div><div class="pipe-name">Writer Agent</div><div class="pipe-sub">Daml generation</div></div>
+          <div class="pipe-node"><div class="pipe-n">04</div><div class="pipe-name">Compile Agent</div><div class="pipe-sub">dpm build</div></div>
+          <div class="pipe-node"><div class="pipe-n">05</div><div class="pipe-name">Fix Agent</div><div class="pipe-sub">Auto-repair</div></div>
+          <div class="pipe-node"><div class="pipe-n">06</div><div class="pipe-name">Audit Layer</div><div class="pipe-sub">5-gate scan</div></div>
+          <div class="pipe-node"><div class="pipe-n">07</div><div class="pipe-name">Deploy Agent</div><div class="pipe-sub">Canton Ledger API</div></div>
+        </div>
+
+        <div class="callout c-note">
+          <span class="c-icon">🔷</span>
+          <div class="c-body">
+            <div class="c-label cl-blue">What you see in the UI</div>
+            The web interface shows a 5-step progress indicator (Analyzing → Generating → Compiling → Auditing → Deploying). Steps 4 and 5 in the UI combine the internal Fix Agent + Compile Agent retry loop into a single "Compiling" stage.
+          </div>
+        </div>
+
+        <div class="screenshot-wrap">
+          <img src="./assets/images/ginie-pipeline-sidebar.png" alt="Pipeline sidebar" class="screenshot" loading="lazy">
+          <div class="screenshot-caption">Pipeline sidebar · Shown on the contract generator page alongside your prompt</div>
+        </div>
+
+        <h3>Stage-by-stage breakdown</h3>
+        <table>
+          <thead><tr><th>Stage</th><th>Name</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>01</td><td>Intent Agent</td><td>Parses plain English prompt into structured JSON contract specification (parties, fields, choices, constraints)</td></tr>
+            <tr><td>02</td><td>RAG Layer</td><td>Retrieves relevant Daml patterns from the institutional pattern library (ChromaDB vector store)</td></tr>
+            <tr><td>03</td><td>Writer Agent</td><td>Generates complete, idiomatic Daml module based on intent spec and retrieved patterns</td></tr>
+            <tr><td>04</td><td>Compile Agent</td><td>Runs the real <code>dpm build</code> command against the generated Daml source</td></tr>
+            <tr><td>05</td><td>Fix Agent</td><td>Handles compilation errors — recognises 11 error types, retries up to 3×</td></tr>
+            <tr><td>06</td><td>Audit Layer</td><td>Runs 5-gate pre-deployment security scan on every generated contract</td></tr>
+            <tr><td>07</td><td>Deploy Agent</td><td>Uploads compiled DAR to Canton Ledger API, returns Contract ID and CantonScan link</td></tr>
+          </tbody>
+        </table>
+
+        <h4 id="fix-agent">Fix Agent — error types handled</h4>
+        <table>
+          <thead><tr><th>Error type</th><th>Example</th><th>Fix approach</th></tr></thead>
+          <tbody>
+            <tr><td>Missing signatory</td><td><code>Template has no signatories</code></td><td>Adds signatory from first party in spec</td></tr>
+            <tr><td>Type mismatch</td><td><code>Expected Party, got Text</code></td><td>Corrects type annotation</td></tr>
+            <tr><td>Unbound variable</td><td><code>Variable 'amount' not in scope</code></td><td>Adds field to template record</td></tr>
+            <tr><td>Missing import</td><td><code>Unknown module DA.Date</code></td><td>Adds missing import statement</td></tr>
+            <tr><td>Choice return type</td><td><code>Expected ContractId, got ()</code></td><td>Wraps return in correct type</td></tr>
+            <tr><td>Duplicate field</td><td><code>Field 'amount' defined twice</code></td><td>Removes duplicate, merges definitions</td></tr>
+            <tr><td>Missing module header</td><td><code>Expected module declaration</code></td><td>Adds correct <code>module Main where</code></td></tr>
+            <tr><td>Invalid party expression</td><td><code>Party literal not allowed</code></td><td>Converts to parameterised party field</td></tr>
+            <tr><td>Non-consumable archive</td><td><code>archive on non-consumable choice</code></td><td>Adjusts choice kind and return type</td></tr>
+            <tr><td>Missing do block</td><td><code>Expected 'do' keyword</code></td><td>Wraps body in do notation</td></tr>
+            <tr><td>SDK version mismatch</td><td><code>daml-sdk-version mismatch</code></td><td>Updates <code>daml.yaml</code> to SDK 3.4</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- RAG -->
+      <div class="ds" id="rag">
+        <div class="eyebrow">How It Works</div>
+        <h2 class="section-title">RAG &amp; Pattern Library</h2>
+        <p>The RAG (Retrieval-Augmented Generation) layer is what makes Ginie's Daml output idiomatic. Instead of generating from scratch, the Writer Agent retrieves the closest matching patterns from a curated library of validated institutional Daml contracts.</p>
+
+        <h3>What's in the pattern library</h3>
+        <ul class="tl">
+          <li><strong>digital-asset/daml</strong> — official Daml examples and stdlib patterns</li>
+          <li><strong>digital-asset/daml-finance</strong> — financial instrument templates (bond, repo, DvP, cash)</li>
+          <li><strong>digital-asset/splice</strong> — Splice protocol patterns and Canton utilities</li>
+          <li><strong>digital-asset/cn-quickstart</strong> — Canton application scaffolding patterns</li>
+          <li><strong>digital-asset/ex-models</strong> — extended Daml model examples</li>
+          <li>Community-contributed patterns via Canton Skills (MIT, Apache 2.0 licensed)</li>
+        </ul>
+
+        <h3>Canton Skills</h3>
+        <p><a href="https://github.com/BlockX-AI/Canton_skills" target="_blank">Canton Skills</a> is a separately published npm package (<code>npx canton-skills install</code>) that provides a structured knowledge base for AI coding agents. It covers Canton SDK 3.4, Splice 0.5.0, DPM, CIP-0103, CIP-0056, PQS, TypeScript frontend patterns, and deprecated API guardrails. In Ginie, Canton Skills functions as the primary knowledge layer for both the Writer Agent and Fix Agent.</p>
+
+        <div class="callout c-tip">
+          <span class="c-icon">✅</span>
+          <div class="c-body">
+            <div class="c-label cl-green">Using Canton Skills independently</div>
+            Canton Skills works standalone. If you use Claude Code, Codex, or Cursor to write Daml, run <code>npx canton-skills install</code> to give your AI assistant the same Canton knowledge base Ginie uses internally.
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- AUDIT -->
+      <div class="ds" id="audit">
+        <div class="eyebrow">How It Works</div>
+        <h2 class="section-title">Audit Layer</h2>
+        <p>Every Ginie-generated contract passes a 5-gate pre-deployment security scan before any DAR is uploaded to the Canton ledger. A CRITICAL finding blocks deployment entirely and is returned with a specific, line-level explanation.</p>
+
+        <div class="callout c-info">
+          <span class="c-icon">💡</span>
+          <div class="c-body">The audit layer is what separates AI-generated Daml from manually-written Daml in terms of safety. AI models have specific failure modes — particularly around Canton's party and authorization model. The gates are designed around these known failure modes.</div>
+        </div>
+
+        <div class="gate-list">
+          <div class="gate-item">
+            <span class="badge b-red">Gate 1</span>
+            <div class="g-body">
+              <div class="g-title">Signatory presence check</div>
+              <div class="g-desc">Every template must have at least one signatory. A template with zero signatories cannot create contracts on Canton — deployment would succeed but the contract would be unusable.</div>
+              <div class="g-ex">CRITICAL: Template Bond has no signatories — contracts cannot be created on this template.</div>
+            </div>
+          </div>
+          <div class="gate-item">
+            <span class="badge b-red">Gate 2</span>
+            <div class="g-body">
+              <div class="g-title">Controller–signatory validation</div>
+              <div class="g-desc">Choice controllers must appear in the template's signatories. A controller not in signatories can exercise a choice without the asset owner's authorization — a critical vulnerability.</div>
+              <div class="g-ex">CRITICAL: Choice Iou_Transfer: controller Alice is not in signatories. Deployment blocked.</div>
+            </div>
+          </div>
+          <div class="gate-item">
+            <span class="badge b-amber">Gate 3</span>
+            <div class="g-body">
+              <div class="g-title">Unguarded choice analysis</div>
+              <div class="g-desc">Choices without <code>ensure</code> clauses that could be exercised in invalid contract states. These generate warnings, not blocks — the contract deploys but the finding is returned.</div>
+              <div class="g-ex">WARNING: Choice Settle has no ensure clause — may execute on contracts in an invalid settlement state.</div>
+            </div>
+          </div>
+          <div class="gate-item">
+            <span class="badge b-amber">Gate 4</span>
+            <div class="g-body">
+              <div class="g-title">Known anti-pattern matching</div>
+              <div class="g-desc">Checks for hardcoded party strings, missing divulgence controls, non-atomic workflows, and other known Daml anti-patterns. Generates warnings on findings.</div>
+              <div class="g-ex">WARNING: Hardcoded party string "Alice" found in template — use a parameter instead for reusability.</div>
+            </div>
+          </div>
+          <div class="gate-item">
+            <span class="badge b-blue">Gate 5</span>
+            <div class="g-body">
+              <div class="g-title">SCU upgrade compatibility</div>
+              <div class="g-desc">Validates the contract follows Smart Contract Upgrade rules — additive-only field structure, correct <code>@daml.upgrade</code> annotation, valid version string. Every export includes <code>UPGRADE_NOTES.md</code>.</div>
+              <div class="g-ex">UPGRADE_FAIL: Field 'maturityDate' removed from Bond template — non-additive change blocks SCU compatibility.</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Reading the security scores</h3>
+        <p>After successful deployment, Ginie returns three Enterprise Security &amp; Compliance scores — Security, Compliance, and Enterprise readiness — generated from the audit findings and shown on the deployed contract page.</p>
+
+        <div class="screenshot-wrap">
+          <img src="./assets/images/ginie-security-scores.png" alt="Post-deployment security scores" class="screenshot" loading="lazy">
+          <div class="screenshot-caption">Post-deployment scores · Security · Compliance · Enterprise · Review Recommended when scores are below threshold</div>
+        </div>
+
+        <table>
+          <thead><tr><th>Score</th><th>What it measures</th><th>Block threshold</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Security</strong></td><td>Gate 1 + 2 findings weighted by severity</td><td>CRITICAL finding = blocked</td></tr>
+            <tr><td><strong>Compliance</strong></td><td>Gate 3 + 4 warnings and anti-pattern density</td><td>High warning count = Review Recommended</td></tr>
+            <tr><td><strong>Enterprise</strong></td><td>SCU compatibility + documentation quality</td><td>Upgrade-incompatible = blocked</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- SCU -->
+      <div class="ds" id="scu">
+        <div class="eyebrow">How It Works</div>
+        <h2 class="section-title">SCU Compatibility</h2>
+        <p>Smart Contract Upgrade (SCU) is Canton's on-chain contract upgrade mechanism. Every Ginie-generated contract is SCU-compatible from the first deployment — it can be upgraded on-chain without downtime or manual migration of active contracts.</p>
+
+        <h3>What Ginie enforces by default</h3>
+        <ul class="tl">
+          <li>All new fields added to templates are <code>Optional</code> — new fields cannot break existing contracts</li>
+          <li>No field removals or renames — additive-only evolution enforced by Gate 5</li>
+          <li><code>@daml.upgrade</code> annotation structure applied to upgrading modules</li>
+          <li><code>daml.yaml</code> version string uses proper semver format — not hardcoded <code>0.0.1</code></li>
+          <li>Every export bundle includes <code>UPGRADE_NOTES.md</code> documenting the upgrade path</li>
+        </ul>
+
+        <h3>The SCU Upgrade Agent (M2)</h3>
+        <p>When you need to modify an already-deployed contract, the SCU Upgrade Agent handles the full upgrade lifecycle — generating the new version with <code>upgradeFrom</code> annotation, validating additive-only changes, and bumping the <code>daml.yaml</code> version.</p>
+
+        <div class="cb">
+          <div class="cb-hdr"><span class="cb-lang">python</span><button class="cb-copy">copy</button></div>
+          <div class="cb-body"><pre><span class="cm"># M2+ — Upgrade an existing deployed contract</span>
+result = client.<span class="fn">upgrade</span>(
+    source_file=<span class="st">"./Bond.daml"</span>,
+    current_version=<span class="st">"0.0.1"</span>,
+    modification=<span class="st">"add an optional maturityExtension field of type Optional Date"</span>
+)
+<span class="cm"># result.new_source    — upgraded .daml with upgradeFrom annotation</span>
+<span class="cm"># result.daml_yaml     — bumped to version 0.0.2</span>
+<span class="cm"># result.upgrade_notes — UPGRADE_NOTES.md for active contract migration</span></pre>
+          </div>
+        </div>
+
+        <div class="callout c-note">
+          <span class="c-icon">🔷</span>
+          <div class="c-body">
+            <div class="c-label cl-blue">CIP-0103 compliance</div>
+            Ginie's upgrade approach follows Canton Improvement Proposal 0103 — the formal specification for on-chain Daml contract upgrades. The <code>UPGRADE_NOTES.md</code> generated in every export explains any manual migration steps required for active contract instances.
+          </div>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <a class="pn-link" href="./getting-started.html">
+          <span class="pn-dir">← Previous</span>
+          <span class="pn-title">Quick Start</span>
+          <span class="pn-desc">Deploy your first contract</span>
+        </a>
+        <a class="pn-link next" href="./features.html">
+          <span class="pn-dir">Next →</span>
+          <span class="pn-title">Features</span>
+          <span class="pn-desc">Templates, Explorer, GitHub &amp; more</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="./assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "ginie-docs",
+  "version": "1.0.0",
+  "description": "Ginie Docs — AI-Powered Canton dApp Generator Documentation",
+  "main": "index.html",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "keywords": ["canton", "daml", "blockchain", "smart-contracts", "documentation"],
+  "author": "BlockX AI",
+  "license": "MIT"
+}

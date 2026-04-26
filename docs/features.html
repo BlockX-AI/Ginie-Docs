@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features — Ginie Docs</title>
+  <link rel="icon" href="https://canton.ginie.xyz/ginie-logo.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="topbar-logo" href="./index.html">
+    <img src="https://canton.ginie.xyz/ginie-logo.ico" alt="Ginie" class="logo-img">
+    <span class="logo-name">Ginie</span>
+    <span class="logo-ver">v1.0</span>
+  </a>
+  <div class="search-wrap">
+    <svg class="search-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="12.5" y1="12.5" x2="17" y2="17"/></svg>
+    <input class="search-box" id="search-input" type="text" placeholder="Search docs…" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div class="topbar-right">
+    <a class="t-link" href="https://github.com/BlockX-AI/Canton_Ginie" target="_blank">GitHub</a>
+    <a class="t-btn" href="https://canton.ginie.xyz" target="_blank">Try Ginie →</a>
+    <button class="t-theme" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+      <svg id="theme-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="ns">
+      <div class="nst">Getting Started</div>
+      <a class="ni" href="./index.html"><div class="nd"></div>Introduction</a>
+      <a class="ni" href="./getting-started.html"><div class="nd"></div>Quick Start</a>
+      <a class="ni" href="./getting-started.html#core-concepts"><div class="nd"></div>Core Concepts</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">How It Works</div>
+      <a class="ni" href="./how-it-works.html"><div class="nd"></div>7-Stage Pipeline</a>
+      <a class="ni" href="./how-it-works.html#rag"><div class="nd"></div>RAG &amp; Pattern Library</a>
+      <a class="ni" href="./how-it-works.html#audit"><div class="nd"></div>Audit Layer</a>
+      <a class="ni" href="./how-it-works.html#scu"><div class="nd"></div>SCU Compatibility</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">Features</div>
+      <a class="ni" href="./features.html"><div class="nd"></div>Contract Templates</a>
+      <a class="ni" href="./features.html#explorer"><div class="nd"></div>Ledger Explorer</a>
+      <a class="ni" href="./features.html#dapp"><div class="nd"></div>dApp Builder</a>
+      <a class="ni" href="./features.html#github"><div class="nd"></div>GitHub Integration</a>
+      <a class="ni" href="./features.html#mcp"><div class="nd"></div>MCP Server</a>
+      <a class="ni" href="./features.html#ide"><div class="nd"></div>IDE Extensions</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">SDK &amp; Self-Hosting</div>
+      <a class="ni" href="./platform.html"><div class="nd"></div>Python SDK</a>
+      <a class="ni" href="./platform.html#selfhost"><div class="nd"></div>Self-Hosting</a>
+      <a class="ni" href="./platform.html#ginie1"><div class="nd"></div>Ginie-1 (Air-Gapped)</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">Reference</div>
+      <a class="ni" href="./reference.html"><div class="nd"></div>Scope &amp; Limitations</a>
+      <a class="ni" href="./reference.html#faq"><div class="nd"></div>FAQ</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="ci">
+
+      <!-- CONTRACT TEMPLATES -->
+      <div class="ds" id="templates">
+        <div class="eyebrow">Features</div>
+        <h1 class="section-title">Contract Templates</h1>
+        <p>Ginie ships with 20 validated institutional contract templates — each with a live Contract ID on GinieNet that you can verify on CantonScan before deploying your own version.</p>
+
+        <table>
+          <thead><tr><th>Template</th><th>Description</th><th>Complexity</th><th>Parties</th></tr></thead>
+          <tbody>
+            <tr><td>IOU</td><td>Simple bilateral debt obligation with transfer and settle choices</td><td>~60 lines</td><td>2</td></tr>
+            <tr><td>Token Transfer</td><td>Fungible asset transfer between two parties with atomic settlement</td><td>~80 lines</td><td>2</td></tr>
+            <tr><td>Bond</td><td>Debt instrument with issuer, holder, coupon, and maturity</td><td>~120 lines</td><td>2</td></tr>
+            <tr><td>Repo Agreement</td><td>Securities repurchase with initial sale and repurchase choices</td><td>~140 lines</td><td>2</td></tr>
+            <tr><td>DvP (Delivery vs Payment)</td><td>Atomic exchange of asset against cash — two-leg settlement</td><td>~160 lines</td><td>3</td></tr>
+            <tr><td>Custody</td><td>Asset custody arrangement with client, custodian, and instruction choices</td><td>~130 lines</td><td>3</td></tr>
+            <tr><td>AML Attestation</td><td>KYC/AML compliance attestation with regulator observer</td><td>~90 lines</td><td>3</td></tr>
+            <tr><td>Multi-Party Settlement</td><td>Three-party workflow with sequenced approval and settlement</td><td>~180 lines</td><td>3</td></tr>
+            <tr><td>Escrow</td><td>Conditional payment held by a neutral third party</td><td>~110 lines</td><td>3</td></tr>
+            <tr><td>Subscription</td><td>Recurring payment obligation with cancel and renew choices</td><td>~95 lines</td><td>2</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout c-tip">
+          <span class="c-icon">✅</span>
+          <div class="c-body">
+            <div class="c-label cl-green">Using templates as a starting point</div>
+            You can describe a variant in your prompt — <em>"Create a bond like the standard template but with a floating rate coupon and an optional early redemption choice"</em> — and Ginie will use the bond template as the RAG foundation while applying your modifications.
+          </div>
+        </div>
+
+        <h3>Template prompt patterns</h3>
+        <table>
+          <thead><tr><th>What you want</th><th>Example prompt</th></tr></thead>
+          <tbody>
+            <tr><td>Vanilla IOU</td><td>"Create an IOU between Alice and Bob for £10,000 GBP. Alice can transfer, Bob can settle."</td></tr>
+            <tr><td>Bond with coupon</td><td>"Create a fixed-rate bond: issuer Alice, holder Bob, £50,000 principal, 5% annual coupon, matures 2026-01-01."</td></tr>
+            <tr><td>DvP settlement</td><td>"Create a delivery vs payment: Alice delivers 100 tokens to Bob, Bob pays £5,000. Settlement is atomic."</td></tr>
+            <tr><td>KYC attestation</td><td>"Create a KYC attestation where Compliance can approve Alice, and Regulator can observe but not modify."</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- LEDGER EXPLORER -->
+      <div class="ds" id="explorer">
+        <div class="eyebrow">Features</div>
+        <h2 class="section-title">Ledger Explorer</h2>
+        <p>The Ledger Explorer gives you a live view of the Canton sandbox state — all contracts, parties, packages, and a verification tool. Access it via <strong>Ledger Explorer</strong> in the header or navigate to <code>/explorer</code>.</p>
+
+        <div class="screenshot-wrap">
+          <img src="./assets/images/ginie-ledger-explorer.png" alt="Ledger Explorer overview" class="screenshot" loading="lazy">
+          <div class="screenshot-caption">Ledger Explorer · Canton Online · 10 Parties · 36 Packages · Contract list with signatories</div>
+        </div>
+
+        <h3>What the Explorer shows</h3>
+        <table>
+          <thead><tr><th>Tab</th><th>What you see</th></tr></thead>
+          <tbody>
+            <tr><td>Contracts</td><td>All contracts visible to your party, filtered by the Daml privacy model. Contract ID, Template ID, and signatory count.</td></tr>
+            <tr><td>Parties</td><td>All parties allocated on the sandbox. Shows party ID and display name.</td></tr>
+            <tr><td>Packages</td><td>All DAR packages uploaded to the ledger. Shows Package ID and metadata.</td></tr>
+            <tr><td>Verify</td><td>Paste any Contract ID to verify it exists on the ledger and inspect its payload.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Verifying a contract</h3>
+        <p>The Verify tab accepts any Contract ID and returns the full contract payload — template, signatories, and field values. This is the on-ledger proof that your contract exists and is active.</p>
+
+        <div class="screenshot-wrap">
+          <img src="./assets/images/ginie-ledger-verify.png" alt="Ledger Explorer verify tab" class="screenshot" loading="lazy">
+          <div class="screenshot-caption">Verify tab · Contract verified on Canton ledger · Full payload with issuer, owner, amount</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- DAPP BUILDER -->
+      <div class="ds" id="dapp">
+        <div class="eyebrow">Features</div>
+        <h2 class="section-title">Full-Stack dApp Builder</h2>
+        <p>Available from M2. Ginie can generate a complete full-stack Canton dApp — a Daml contract layer plus a Next.js frontend with CIP-0103 wallet connectivity — from a single English prompt.</p>
+
+        <div class="callout c-warn">
+          <span class="c-icon">⚠️</span>
+          <div class="c-body">
+            <div class="c-label cl-amber">M2 Feature</div>
+            The full-stack dApp Builder is under active development and will be available in Milestone 2. The contract generation and audit pipeline are live now.
+          </div>
+        </div>
+
+        <h3>What gets generated</h3>
+        <ul class="tl">
+          <li>Daml smart contract module (compiled, audited, deployed)</li>
+          <li>IDL JSON spec (<code>schemas/idl-spec.json</code>) — the canonical interface description</li>
+          <li>Complete Next.js frontend using <code>@canton-network/dapp-sdk</code></li>
+          <li>CIP-0103 wallet connection (SubWallet compatible)</li>
+          <li>Hosted on a <code>mydamldapp.ginie.dev</code> subdomain — live and accessible</li>
+          <li>Full project export bundle — deployable to Vercel with zero modification</li>
+        </ul>
+
+        <h3>Generation flow</h3>
+        <table>
+          <thead><tr><th>Step</th><th>Output</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Contract layer</td><td><code>src/Main.daml</code> — compiled, audited, deployed</td><td>Same as standard Ginie generation</td></tr>
+            <tr><td>Interface extraction</td><td><code>schemas/idl-spec.json</code></td><td>Canonical IDL for the frontend generator</td></tr>
+            <tr><td>Frontend generation</td><td>Next.js 14 TypeScript project</td><td>Type-safe from the IDL spec — no manual binding</td></tr>
+            <tr><td>Wallet integration</td><td>CIP-0103 + SubWallet connect button</td><td>Uses official <code>@canton-network/dapp-sdk</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- GITHUB -->
+      <div class="ds" id="github">
+        <div class="eyebrow">Features</div>
+        <h2 class="section-title">GitHub Integration</h2>
+        <p>Every Ginie generation can automatically commit the full project to a GitHub repository in your account. You own the code. Ginie is just the tool that generated the starting point.</p>
+
+        <h3>What gets committed</h3>
+        <table>
+          <thead><tr><th>File</th><th>Contents</th></tr></thead>
+          <tbody>
+            <tr><td><code>src/Main.daml</code></td><td>Full generated Daml source</td></tr>
+            <tr><td><code>daml.yaml</code></td><td>Canton SDK 3.4 configuration with correct version string</td></tr>
+            <tr><td><code>AUDIT_REPORT.md</code></td><td>Complete 5-gate audit findings with line-level citations</td></tr>
+            <tr><td><code>UPGRADE_NOTES.md</code></td><td>SCU upgrade path documentation</td></tr>
+            <tr><td><code>Makefile</code></td><td><code>make build</code>, <code>make test</code>, <code>make deploy</code> — zero Ginie dependency</td></tr>
+            <tr><td><code>README.md</code></td><td>Contract description, party setup, deployment instructions</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Iterating creates pull requests</h3>
+        <p>When you click <strong>Iterate</strong> to modify a deployed contract, Ginie creates a new branch, applies the changes, and opens a pull request against your repo. The PR includes a diff of what changed, and the new audit report is posted as a PR comment. Gate 5 runs against the new version — if the change violates SCU compatibility, the PR is flagged before you merge.</p>
+
+        <h3>Recompilation independence</h3>
+        <p>Every generated repo includes a <code>Makefile</code> with <code>make build</code>, <code>make test</code>, and <code>make deploy</code>. Once a contract is in your GitHub repo, you can compile, test, and redeploy it with standard Canton SDK tooling — no Ginie required, ever.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- MCP SERVER -->
+      <div class="ds" id="mcp">
+        <div class="eyebrow">Features</div>
+        <h2 class="section-title">MCP Server</h2>
+        <p>Available from M2. Ginie exposes a Model Context Protocol (MCP) server integrating with <a href="https://github.com/jatinpandya/build-on-canton-mcp" target="_blank">Build-on-Canton MCP</a> tools — wiring live Canton documentation and tooling directly into Ginie's pipeline agents and your AI editor of choice.</p>
+
+        <table>
+          <thead><tr><th>Tool</th><th>What it does</th><th>Used by</th></tr></thead>
+          <tbody>
+            <tr><td><code>canton_lookup</code></td><td>Queries live Canton documentation and API reference</td><td>RAG Layer — augments pattern retrieval with live docs</td></tr>
+            <tr><td><code>canton_check</code></td><td>Validates Daml code against current Canton SDK rules</td><td>Fix Agent — surfaces deprecated patterns before compilation</td></tr>
+            <tr><td><code>canton_network_info</code></td><td>Returns current Canton Network state and ledger metadata</td><td>Deploy Agent — confirms deployment target before DAR upload</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Using the MCP server with your AI editor</h3>
+        <p>The Ginie MCP server is compatible with Claude Code, Cursor, Windsurf, and any editor that supports the MCP protocol. Point your editor's MCP configuration to the Ginie server endpoint to get Canton-aware AI assistance — the same knowledge base Ginie uses internally becomes available in your own coding workflow.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- IDE EXTENSIONS -->
+      <div class="ds" id="ide">
+        <div class="eyebrow">Features</div>
+        <h2 class="section-title">IDE Extensions</h2>
+        <p>Available from M3. Ginie ships IDE extensions for VS Code, Cursor, and JetBrains — bringing generation and audit capabilities directly into your development environment.</p>
+
+        <div class="cg3">
+          <div class="card">
+            <div class="card-ico">🔷</div>
+            <div class="card-t">VS Code</div>
+            <div class="card-d">Inline Daml generation, deploy from command palette, audit sidebar with gate findings in real time.</div>
+          </div>
+          <div class="card">
+            <div class="card-ico">⚡</div>
+            <div class="card-t">Cursor</div>
+            <div class="card-d">Native Cursor integration using the Ginie MCP server. AI-powered Daml generation with Canton Skills knowledge.</div>
+          </div>
+          <div class="card">
+            <div class="card-ico">🧠</div>
+            <div class="card-t">JetBrains</div>
+            <div class="card-d">IntelliJ IDEA plugin with Ginie generation, Canton SDK integration, and audit findings in the inspection panel.</div>
+          </div>
+        </div>
+
+        <div class="callout c-warn">
+          <span class="c-icon">⚠️</span>
+          <div class="c-body">
+            <div class="c-label cl-amber">M3 Feature</div>
+            IDE extensions are planned for Milestone 3. Use the web interface or Python SDK today for full generation and audit capabilities.
+          </div>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <a class="pn-link" href="./how-it-works.html">
+          <span class="pn-dir">← Previous</span>
+          <span class="pn-title">How It Works</span>
+          <span class="pn-desc">Pipeline, RAG, Audit, SCU</span>
+        </a>
+        <a class="pn-link next" href="./platform.html">
+          <span class="pn-dir">Next →</span>
+          <span class="pn-title">SDK &amp; Self-Hosting</span>
+          <span class="pn-desc">Python SDK, Docker, Ginie-1</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="./assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction — Ginie Docs</title>
+  <link rel="icon" href="https://canton.ginie.xyz/ginie-logo.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="topbar-logo" href="./index.html">
+    <img src="https://canton.ginie.xyz/ginie-logo.ico" alt="Ginie" class="logo-img">
+    <span class="logo-name">Ginie</span>
+    <span class="logo-ver">v1.0</span>
+  </a>
+  <div class="search-wrap">
+    <svg class="search-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><line x1="12.5" y1="12.5" x2="17" y2="17"/></svg>
+    <input class="search-box" id="search-input" type="text" placeholder="Search docs…" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div class="topbar-right">
+    <a class="t-link" href="https://github.com/BlockX-AI/Canton_Ginie" target="_blank">GitHub</a>
+    <a class="t-btn" href="https://canton.ginie.xyz" target="_blank">Try Ginie →</a>
+    <button class="t-theme" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+      <svg id="theme-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="ns">
+      <div class="nst">Getting Started</div>
+      <a class="ni" href="./index.html"><div class="nd"></div>Introduction</a>
+      <a class="ni" href="./getting-started.html"><div class="nd"></div>Quick Start</a>
+      <a class="ni" href="./getting-started.html#core-concepts"><div class="nd"></div>Core Concepts</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">How It Works</div>
+      <a class="ni" href="./how-it-works.html"><div class="nd"></div>7-Stage Pipeline</a>
+      <a class="ni" href="./how-it-works.html#rag"><div class="nd"></div>RAG &amp; Pattern Library</a>
+      <a class="ni" href="./how-it-works.html#audit"><div class="nd"></div>Audit Layer</a>
+      <a class="ni" href="./how-it-works.html#scu"><div class="nd"></div>SCU Compatibility</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">Features</div>
+      <a class="ni" href="./features.html"><div class="nd"></div>Contract Templates</a>
+      <a class="ni" href="./features.html#explorer"><div class="nd"></div>Ledger Explorer</a>
+      <a class="ni" href="./features.html#dapp"><div class="nd"></div>dApp Builder</a>
+      <a class="ni" href="./features.html#github"><div class="nd"></div>GitHub Integration</a>
+      <a class="ni" href="./features.html#mcp"><div class="nd"></div>MCP Server</a>
+      <a class="ni" href="./features.html#ide"><div class="nd"></div>IDE Extensions</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">SDK &amp; Self-Hosting</div>
+      <a class="ni" href="./platform.html"><div class="nd"></div>Python SDK</a>
+      <a class="ni" href="./platform.html#selfhost"><div class="nd"></div>Self-Hosting</a>
+      <a class="ni" href="./platform.html#ginie1"><div class="nd"></div>Ginie-1 (Air-Gapped)</a>
+    </div>
+    <div class="ndiv"></div>
+    <div class="ns">
+      <div class="nst">Reference</div>
+      <a class="ni" href="./reference.html"><div class="nd"></div>Scope &amp; Limitations</a>
+      <a class="ni" href="./reference.html#faq"><div class="nd"></div>FAQ</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="ci">
+
+      <div class="ds">
+        <div class="eyebrow">Documentation</div>
+        <h1 class="section-title">Ginie — AI-Powered Canton dApp Generator</h1>
+        <p class="sdesc">Ginie transforms plain English descriptions into fully compiled, deployed Daml smart contracts on Canton Network — in under 90 seconds, with zero Daml knowledge required.</p>
+
+        <div class="screenshot-wrap">
+          <img src="./assets/images/ginie-step1-landing-page.png" alt="Ginie homepage · canton.ginie.xyz" class="screenshot" loading="lazy">
+          <div class="screenshot-caption">Ginie homepage · canton.ginie.xyz</div>
+        </div>
+
+        <div class="callout c-info">
+          <span class="c-icon">💡</span>
+          <div class="c-body">
+            <div class="c-label cl-green">What makes Ginie different</div>
+            Ginie doesn't just generate code — it <strong>compiles it with the real Canton SDK</strong>, runs a <strong>5-gate security audit</strong>, and <strong>deploys it to a live Canton ledger</strong>. The output is a verified Contract ID, not a code suggestion.
+          </div>
+        </div>
+
+        <div class="cg2">
+          <div class="card">
+            <div class="card-ico">⚡</div>
+            <div class="card-t">Quick Start</div>
+            <div class="card-d">Deploy your first Canton contract in under 5 minutes using the web interface or Python SDK.</div>
+            <a class="card-lnk" href="./getting-started.html">Get started →</a>
+          </div>
+          <div class="card">
+            <div class="card-ico">🔍</div>
+            <div class="card-t">How the Pipeline Works</div>
+            <div class="card-d">Learn how Ginie's 7-stage AI pipeline takes your description from intent to deployed Contract ID.</div>
+            <a class="card-lnk" href="./how-it-works.html">See the pipeline →</a>
+          </div>
+          <div class="card">
+            <div class="card-ico">🛡️</div>
+            <div class="card-t">Audit Layer</div>
+            <div class="card-d">Understand the 5-gate pre-deployment security scan that runs on every generated contract.</div>
+            <a class="card-lnk" href="./how-it-works.html#audit">See the gates →</a>
+          </div>
+          <div class="card">
+            <div class="card-ico">🐍</div>
+            <div class="card-t">Python SDK</div>
+            <div class="card-d">Use Ginie programmatically with <code>pip install ginie</code>. Script contract generation and deployment.</div>
+            <a class="card-lnk" href="./platform.html">SDK reference →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="ds">
+        <div class="eyebrow">Overview</div>
+        <h2 class="section-title">What Ginie Does</h2>
+
+        <h3>End-to-end automation</h3>
+        <p>Ginie accepts a plain English description of a financial contract and returns a deployed Canton smart contract with a live Contract ID. There is no manual SDK installation, no Daml syntax to learn, and no deployment command to run. You describe — Ginie deploys.</p>
+
+        <h3>Who it's for</h3>
+        <div class="cg3">
+          <div class="card">
+            <div class="card-ico">🏦</div>
+            <div class="card-t">Financial Teams</div>
+            <div class="card-d">Prototype IOUs, bonds, repos, and DvP settlements on Canton without a Daml developer.</div>
+          </div>
+          <div class="card">
+            <div class="card-ico">👩‍💻</div>
+            <div class="card-t">Developers</div>
+            <div class="card-d">Use the Python SDK or IDE extensions to integrate Canton contract deployment into your CI pipeline.</div>
+          </div>
+          <div class="card">
+            <div class="card-ico">🔬</div>
+            <div class="card-t">Researchers</div>
+            <div class="card-d">Rapidly iterate on Canton smart contract designs and compare results on-ledger using CantonScan.</div>
+          </div>
+        </div>
+
+        <h3>Current state</h3>
+        <table>
+          <thead>
+            <tr><th>Capability</th><th>Available</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>GinieNet (public sandbox)</td><td><span class="badge b-green">Live</span></td><td>canton.ginie.xyz — no account required</td></tr>
+            <tr><td>7-stage pipeline</td><td><span class="badge b-green">Live</span></td><td>Intent → RAG → Write → Compile → Fix → Audit → Deploy</td></tr>
+            <tr><td>5-gate audit layer</td><td><span class="badge b-green">Live</span></td><td>Security + SCU compatibility pre-deployment</td></tr>
+            <tr><td>GitHub export</td><td><span class="badge b-green">Live</span></td><td>Full artifact bundle committed to your repo</td></tr>
+            <tr><td>Python SDK</td><td><span class="badge b-green">Live</span></td><td><code>pip install ginie</code></td></tr>
+            <tr><td>SCU Upgrade Agent</td><td><span class="badge b-amber">M2</span></td><td>On-chain upgrade lifecycle management</td></tr>
+            <tr><td>Full-stack dApp Builder</td><td><span class="badge b-amber">M2</span></td><td>Next.js frontend generation from contract interface</td></tr>
+            <tr><td>Ginie-1 (Air-Gapped Model)</td><td><span class="badge b-blue">Preview</span></td><td>Canton-native open-weight model for regulated environments</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-nav">
+        <div class="pn-placeholder"></div>
+        <a class="pn-link next" href="./getting-started.html">
+          <span class="pn-dir">Next →</span>
+          <span class="pn-title">Quick Start</span>
+          <span class="pn-desc">Deploy your first contract</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="./assets/app.js"></script>
+</body>
+</html>
